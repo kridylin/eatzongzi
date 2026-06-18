@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>包一只心粽 · K心理</title>
+<title>包一只心粽 · zbti粽子人格测试</title>
 <style>
   :root{
     --rice: #FBF6EC;
@@ -51,7 +51,7 @@
   }
   h1 .accent{ color: var(--clay); }
   .sub{
-    max-width: 480px; margin: 0 auto; color: var(--ink-soft);
+    max-width: 520px; margin: 0 auto; color: var(--ink-soft);
     font-size: 15px; line-height: 1.8;
   }
 
@@ -60,7 +60,6 @@
     padding: 32px 20px 80px;
   }
 
-  /* ---------- preview block ---------- */
   .preview-card{
     background: var(--paper);
     border: 1px solid var(--line);
@@ -97,7 +96,6 @@
   .steam-btn:not(:disabled):active{ transform: scale(0.98); }
   .limit-msg{ font-size:12px; color: var(--clay); margin-top:10px; min-height:14px; font-weight:600; }
 
-  /* ---------- step sections ---------- */
   .step{ margin-bottom: 36px; }
   .step-head{ display:flex; align-items:center; gap:10px; margin-bottom:14px; }
   .step-badge{
@@ -145,21 +143,17 @@
   }
   .filling-note b{ color: var(--ink); }
 
-  /* ---------- peeling stage ---------- */
   .peeling-stage{ display:none; text-align:center; padding: 10px 0 30px; }
   .peeling-stage.show{ display:flex; flex-direction:column; align-items:center; }
-  
   .split-zongzi-wrap{
     background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
     padding: 30px; display: flex; align-items: center; justify-content: center;
     width: 100%; max-width: 320px; margin: 0 auto 24px;
   }
   .split-zongzi-wrap svg{ width:100%; max-width: 200px; height:auto; }
-
   .split-actions{ width:100%; max-width:400px; margin: 0 auto; }
   .action-title{ font-size:14px; font-weight: 700; color: var(--ink-soft); margin-bottom: 12px; }
   .card-choice-group{ display:flex; gap:12px; margin-bottom: 24px; }
-  
   .card-choice{
     flex:1; padding: 16px; border-radius:14px; border: 2px solid var(--line);
     background: var(--paper); cursor:pointer; text-align:center;
@@ -169,7 +163,6 @@
   .card-choice.selected{ border-color: var(--clay); background: var(--clay-light); }
   .card-choice .ic{ font-size: 24px; margin-bottom: 6px; display:block; }
   .card-choice .lb{ font-size: 14px; font-weight:800; color: var(--ink); display:block;}
-  
   .final-btn{
     width:100%; padding: 16px; background: var(--clay); color: #fff;
     border:none; border-radius: 12px; font-size: 16px; font-weight: 800;
@@ -183,7 +176,6 @@
     border-top: 1px solid var(--line);
   }
 
-  /* ---------- card modal ---------- */
   .overlay{
     position: fixed; inset:0; background: rgba(43,38,32,0.6);
     display:flex; align-items:center; justify-content:center; z-index: 50;
@@ -191,7 +183,7 @@
   }
   .overlay.show{ opacity:1; pointer-events:auto; }
   .card-wrap{
-    width:100%; max-width: 360px; transform: scale(0.94); transition: transform 0.3s ease;
+    width:100%; max-width: 380px; transform: scale(0.94); transition: transform 0.3s ease;
     max-height: 92vh; overflow-y: auto;
   }
   .overlay.show .card-wrap{ transform: scale(1); }
@@ -202,23 +194,39 @@
     display:flex; flex-direction:column; align-items:center;
     padding: 28px 24px 24px;
   }
-  .card-brand{ font-size:11px; letter-spacing:0.2em; color: var(--leaf); font-weight:800; margin-bottom: 16px; }
-  .card-svg-wrap{ width: 120px; margin-bottom: 14px; }
+  .card-brand{ font-size:11px; letter-spacing:0.2em; color: var(--leaf); font-weight:800; margin-bottom: 12px; }
+  .rarity-pill{
+    font-size: 11px; font-weight: 900; letter-spacing: 0.08em;
+    padding: 6px 12px; border-radius: 999px; margin-bottom: 14px;
+    border: 1px solid var(--line); background: var(--rice); color: var(--ink-soft);
+  }
+  .rarity-pill.n{ background:#F7F3E9; color:#6E6658; border-color:#E5DDCB; }
+  .rarity-pill.r{ background:#E8F0E3; color:#4A6741; border-color:#7A9470; }
+  .rarity-pill.ssr{ background:#FBEAE2; color:#C25B3A; border-color:#E6A38A; }
+
+  .card-svg-wrap{ width: 112px; margin-bottom: 14px; }
   .card-svg-wrap svg{ width:100%; height:auto; }
-  .card-name{ font-size: 20px; font-weight:800; margin-bottom: 4px; text-align:center;}
-  .card-tags{ font-size:12px; color: var(--ink-soft); margin-bottom:18px; text-align:center; }
-  .card-divider{ width:32px; height:3px; background: var(--clay); border-radius:2px; margin-bottom:18px; }
+  .card-name{ font-size: 20px; font-weight:900; margin-bottom: 6px; text-align:center; line-height:1.35;}
+  .card-tags{ font-size:12px; color: var(--ink-soft); margin-bottom:16px; text-align:center; line-height:1.6; }
+  .card-divider{ width:32px; height:3px; background: var(--clay); border-radius:2px; margin-bottom:16px; }
   .card-msg{
-    font-size: 14.5px; line-height:1.85; text-align:left;
-    color: var(--ink); padding: 0 2px; font-weight:600;
-    white-space: pre-line;
+    font-size: 14.2px; line-height:1.85; text-align:left;
+    color: var(--ink); padding: 0 2px; font-weight:600; white-space:pre-line;
   }
+  .card-msg b{ color: var(--clay); }
   .card-keyword{
-    margin-top:16px; font-size: 11.5px; color: var(--clay); letter-spacing:0.08em; font-weight:800;
+    margin-top:16px; font-size: 11.5px; color: var(--clay); letter-spacing:0.04em; font-weight:800; text-align:center; line-height:1.6;
   }
+  .share-title{
+    width:100%; margin-top:14px; padding: 12px 14px;
+    border-radius: 14px; background: var(--clay-light); border: 1px solid #E6C0AE;
+    color: var(--clay); font-size: 12.5px; line-height:1.65; font-weight:800;
+    text-align:left;
+  }
+  .share-title span{ display:block; color: var(--ink-soft); font-size: 10.5px; letter-spacing:0.1em; margin-bottom: 4px; }
   .card-footer{ margin-top: 16px; font-size: 10.5px; color: var(--ink-soft); letter-spacing:0.08em; }
 
-  .card-actions{ display:flex; gap:10px; margin-top:16px; }
+  .card-actions{ display:flex; gap:10px; margin-top:16px; flex-wrap:wrap; }
   .card-actions button{
     flex:1; padding:14px; border-radius:12px; border:none; font-size:14px; font-weight:800;
     cursor:pointer; font-family: inherit;
@@ -226,6 +234,8 @@
   .card-actions button:active{ transform: scale(0.97); }
   .btn-reroll{ background: var(--paper); color: var(--ink); border: 2px solid var(--line) !important; }
   .btn-save{ background: var(--leaf); color: #fff; }
+  .btn-copy{ background: var(--clay); color: #fff; }
+
   .btn-close{
     display:block; margin: 14px auto 0; background:none; border:none; color: rgba(255,255,255,0.9);
     font-size: 13.5px; cursor:pointer; font-family: inherit; font-weight:700;
@@ -249,13 +259,12 @@
 <body>
 
 <header>
-  <div class="eyebrow">K心理 · 端午心粽工坊</div>
+  <div class="eyebrow">K心理 · ZBTI 心粽人格测试</div>
   <h1>包一只<span class="accent">心粽</span></h1>
-  <p class="sub">挑一片粽叶，选一把米，填一份心意。<br>生成你的心粽人格画像：你爱包什么粽子，就藏着什么样的自己。</p>
+  <p class="sub">挑一片粽叶，选一把米，填一份心意。<br>你以为你在选配料，其实是在暴露自己的隐藏人格。</p>
 </header>
 
 <main>
-
   <div id="diyStage">
     <div class="preview-card">
       <div class="mat">
@@ -273,7 +282,7 @@
       <div class="step-head">
         <span class="step-badge">1</span>
         <span class="step-title">选粽叶</span>
-        <span class="step-hint">决定外形与香气</span>
+        <span class="step-hint">决定外壳人设</span>
       </div>
       <div class="opt-grid" id="leafGrid"></div>
     </div>
@@ -282,7 +291,7 @@
       <div class="step-head">
         <span class="step-badge">2</span>
         <span class="step-title">选主料</span>
-        <span class="step-hint">决定底色与质感</span>
+        <span class="step-hint">决定内在底色</span>
       </div>
       <div class="opt-grid" id="grainGrid"></div>
     </div>
@@ -294,8 +303,8 @@
         <span class="step-hint">最多选 3 种</span>
       </div>
       <div class="filling-tabs">
-        <div class="ftab sweet active" data-flavor="sweet">甜 · 温暖自洽</div>
-        <div class="ftab salty" data-flavor="salty">咸 · 踏实丰盈</div>
+        <div class="ftab sweet active" data-flavor="sweet">甜 · 情绪人格</div>
+        <div class="ftab salty" data-flavor="salty">咸 · 行动人格</div>
       </div>
       <div class="opt-grid" id="fillingGrid"></div>
       <div class="filling-note" id="fillingNote">可多选，建议不超过 3 种，搭配更和谐。</div>
@@ -307,9 +316,8 @@
     <div class="split-zongzi-wrap">
       <svg id="splitZongziSvg" viewBox="0 0 220 240" xmlns="http://www.w3.org/2000/svg"></svg>
     </div>
-    
     <div class="split-actions">
-      <div class="action-title">为你包的心粽选择一张人格卡封面：</div>
+      <div class="action-title">为你的心粽人格选择一张封面款式：</div>
       <div class="card-choice-group">
         <div class="card-choice selected" data-choice="cross">
           <span class="ic">✂️</span>
@@ -323,11 +331,10 @@
       <button class="final-btn" id="generateCardBtn">生成心粽人格报告</button>
     </div>
   </div>
-
 </main>
 
 <footer>
-  每一只粽子配一份心粽人格画像 · 仅供娱乐，也愿你从中看见一点自己<br>
+  每一只粽子生成一份心粽人格画像 · 仅供娱乐，也愿你从中看见一点自己<br>
   端午安康 · K心理<br>
   +创作者vx：Nllsy-Ao_o
 </footer>
@@ -335,18 +342,21 @@
 <div class="overlay" id="overlay">
   <div class="card-wrap">
     <div id="shareCard">
-      <div class="card-brand">K 心 理 · 心 粽 人 格 卡</div>
+      <div class="card-brand">K 心 理 · ZBTI 心 粽 人 格</div>
+      <div class="rarity-pill" id="rarityPill"></div>
       <div class="card-svg-wrap" id="cardSvgWrap"></div>
       <div class="card-name" id="cardName"></div>
       <div class="card-tags" id="cardTags"></div>
       <div class="card-divider"></div>
       <div class="card-msg" id="cardMsg"></div>
       <div class="card-keyword" id="cardKeyword"></div>
+      <div class="share-title" id="shareTitle"></div>
       <div class="card-footer">+创作者vx：Nllsy-Ao_o</div>
       <div class="badge-row" id="badgeRow"></div>
     </div>
     <div class="card-actions">
       <button class="btn-reroll" id="rerollBtn">换一种解读</button>
+      <button class="btn-copy" id="copyTitleBtn">复制标题</button>
       <button class="btn-save" id="saveBtn">保存人格卡</button>
     </div>
     <button class="btn-close" id="closeBtn">重新包一只</button>
@@ -392,78 +402,157 @@ const FILLINGS = {
   ]
 };
 
-const PERSONA_PROFILES = {
+const PERSONA = {
   leaves: {
     ruoye: {
-      title:'清润边界型', tag:'温柔边界', face:'温和、有分寸、让人放松',
-      report:'你给人的第一印象是舒服、清爽、不过度打扰。你习惯先观察，再靠近；先确认安全，再表达真实。别人可能觉得你很好相处，但真正熟悉你的人会知道，你的温柔并不是没有原则，而是有边界的体面。',
-      gift:'让关系保持舒适距离', lesson:'把边界说出来，不必只在心里默默后退'
+      name:'礼貌门禁', tag:'外壳人设', keywords:['体面','边界感','慢热观察'],
+      one:'你看起来很好说话，但不是谁都能真的进入你的内心大厅。',
+      report:'你的外壳很清爽，给人一种温和、舒服、不过度打扰的感觉。你通常不会一上来就把情绪摊开，而是先观察、再靠近；先确认安全，再慢慢表达真实。别人以为你随和，其实你心里有一套非常安静的准入系统。'
     },
     luwei: {
-      title:'质朴行动型', tag:'踏实可靠', face:'真实、稳当、带着生活感',
-      report:'你给人的感觉很实在。你不太喜欢复杂的人际套路，更相信长期相处里的行动和细节。你不一定是最会说漂亮话的人，但你通常是能把事情稳稳接住的人。你看重真诚，也很容易被具体的陪伴打动。',
-      gift:'用行动证明在意', lesson:'不要总把“我没事”说得太顺口'
+      name:'沉默承重墙', tag:'外壳人设', keywords:['可靠','能扛事','行动派'],
+      one:'你不一定最会说，但真有事的时候，你经常是最稳的那堵墙。',
+      report:'你的外壳带着很强的生活感和承重感。你不喜欢把在意包装得太花哨，更相信行动、细节和长期陪伴。你可能嘴上说“没事”，但身体已经默默把事情接过去了。'
     },
     sigu: {
-      title:'独特感知型', tag:'独特敏感', face:'有一点特别，也有一点难被看透',
-      report:'你不是很容易被一眼看穿的人。你有自己的审美、节奏和判断方式，对氛围、细节和人与人之间微妙的变化很敏感。你不一定总是解释自己，因为你更希望遇到能自然理解你的人。',
-      gift:'捕捉别人忽略的细节', lesson:'不必为了被理解而削弱自己的独特'
+      name:'偏频天线', tag:'外壳人设', keywords:['独特','敏感','精神小宇宙'],
+      one:'你接收世界的频道有点特别，普通人看热闹，你在捕捉暗号。',
+      report:'你的外壳有一点不走寻常路。你对氛围、细节和人与人之间微妙的变化很敏锐，也有自己的审美、节奏和判断方式。你不是故意难懂，只是你的信号频率本来就不太大众。'
     }
   },
   grains: {
     nuomi: {
-      title:'温柔黏合型', tag:'重感情', core:'柔软、重情、需要回应', prefix:'温柔',
-      report:'你的内在底色是柔软的。你很容易被真诚、陪伴和细小的在意打动。你不一定会把需求说得很直接，但你会期待对方能读懂你的情绪。你有一种天然的关系维护力，常常能把松散的人和事重新连接起来。',
-      need:'稳定、真诚、有回应的关系'
+      name:'糯心胶水', tag:'内在底色', keywords:['重感情','会连接','需要回应'],
+      one:'你嘴上可能说随便，心里其实很在意有没有被好好放在心上。',
+      report:'你的内在是柔软而有黏合力的。你很容易被真诚、陪伴和细小的在意打动，也很擅长把松散的人和事重新连接起来。你不是一定要黏着谁，而是很珍惜那种“我们之间有回应”的感觉。'
     },
     zimi: {
-      title:'深度沉静型', tag:'内在丰盛', core:'慢热、深度、需要独处', prefix:'沉静',
-      report:'你的内在比外表更有层次。你不习惯把所有想法都立刻说出来，但你其实想得很深。比起热闹的认同，你更需要安静而准确的理解。真正靠近你的人，会发现你比表面更有力量。',
-      need:'被安静理解，而不是被匆忙定义'
+      name:'深海剧场', tag:'内在底色', keywords:['慢热','内心戏','深度'],
+      one:'你表面没什么波澜，内心可能已经演完三季连续剧。',
+      report:'你的内在比外表更深。你不习惯把所有感受立刻说出来，却会在心里反复咀嚼、判断、消化。比起热闹的认同，你更需要一种安静而准确的理解。真正靠近你的人，会发现你不是冷，而是深。'
     },
     yanmai: {
-      title:'清醒平衡型', tag:'清醒自洽', core:'独立、节奏感、需要轻盈', prefix:'清醒',
-      report:'你的核心气质是清醒。你不想把生活过得太重，也不喜欢被无意义的消耗拖住。你很在意自己的节奏，一旦节奏被打乱，就会明显疲惫。你看起来温和，但其实很需要清楚的边界和可持续的生活方式。',
-      need:'轻盈、清楚、不被过度绑定的空间'
+      name:'低耗系统', tag:'内在底色', keywords:['清醒','节奏感','拒绝消耗'],
+      one:'你不是不合群，你只是对高耗能关系自动省电。',
+      report:'你的内在很清醒，喜欢轻盈、清楚、可持续的生活节奏。你不想被无意义的拉扯消耗，也不喜欢生活长期失控。你看起来温和，但其实很需要边界、秩序和能让自己恢复的空间。'
     }
   },
   fillings: {
-    dousha: { title:'慢热共情型', tag:'共情', short:'共情', keywords:['慢热','细腻','长情'], line:'你很会感受别人没说出口的情绪，温柔常常藏在行动里。', relation:'你在关系里很容易成为照顾者，也容易因为太在意别人而忘记自己。', lesson:'你的感受也值得被认真对待。' },
-    hongzao: { title:'记忆收藏型', tag:'念旧', short:'记忆', keywords:['念旧','仪式感','珍惜'], line:'你容易被回忆、仪式感和细节打动，心里存着很多柔软片段。', relation:'你不需要轰轰烈烈，更在意一个人有没有稳定地记得你。', lesson:'不是所有过去都要反复回看，有些温柔可以收藏，也可以放下。' },
-    lizi: { title:'稳定蓄力型', tag:'后劲', short:'蓄力', keywords:['稳定','韧性','长期主义'], line:'你不是急着证明自己的人，但你有很扎实的后劲。', relation:'你会慢慢观察一个人是否值得，也会在时间里变得越来越可靠。', lesson:'不要低估自己慢慢积累出来的力量。' },
-    guihua: { title:'低调发光型', tag:'松弛', short:'发光', keywords:['低调','气质','松弛'], line:'你不一定喜欢成为焦点，但你会在细节里散发一种轻柔的吸引力。', relation:'别人和你相处时，常常会觉得被安放、被照顾、被温柔地接住。', lesson:'你不需要很用力，也可以被看见。' },
-    mocha: { title:'苦甜反差型', tag:'反差', short:'反差', keywords:['清醒','柔软','别扭可爱'], line:'你外表可能理性克制，内在却柔软、黏人，还有一点小小的孩子气。', relation:'你不太擅长直白示弱，所以常用玩笑、沉默或理性保护自己。', lesson:'偶尔承认自己需要被哄，并不会让你变弱。' },
-    mango: { title:'明亮探索型', tag:'探索', short:'探索', keywords:['好奇','变化','成长感'], line:'你不是单一口味的人，可以安静，也可以被一个新想法突然点亮。', relation:'你需要关系里有新鲜感，也需要对方允许你不断变化。', lesson:'真正适合你的生活，不是永远稳定，而是稳定中还有生长。' },
-    rose: { title:'浪漫感受型', tag:'浪漫', short:'浪漫', keywords:['敏感','审美','情绪价值'], line:'你对氛围、语言和态度很敏感，能分辨什么是真正在意。', relation:'你需要的不是被敷衍地需要，而是被认真地珍惜。', lesson:'你的敏感不是麻烦，而是你感受世界的方式。' },
-    zisu: { title:'安静疗愈型', tag:'疗愈', short:'疗愈', keywords:['安静','包容','稳定陪伴'], line:'你身上有一种安静的疗愈感，不一定说很多，却能让人慢慢放松。', relation:'你常常习惯做懂事的那个人，尽量不给别人添麻烦。', lesson:'温柔的人也可以提出要求，也可以被照顾。' },
+    dousha: {
+      name:'慢热暖炉', tag:'主人格', keywords:['慢热','共情','长情'],
+      line:'你不是上来就火力全开的人，但熟了以后很会把人暖到心软。',
+      analysis:'你很会感受别人没说出口的情绪，也常常把温柔藏在具体行动里。你不是没有需求，只是习惯先照顾场面、照顾别人，再回头处理自己。你需要被提醒：你的感受也值得被认真对待。',
+      motto:'别只给别人供暖，也记得给自己留一格电。'
+    },
+    hongzao: {
+      name:'回忆硬盘', tag:'主人格', keywords:['念旧','细节存档','仪式感'],
+      line:'别人随口一句话，你能在心里自动存档三年。',
+      analysis:'你很容易被细节、回忆和仪式感打动。某个语气、某个场景、某次被认真对待，都会被你放进心里的专属文件夹。你要的不是轰轰烈烈，而是被稳定地记得。',
+      motto:'可以珍藏过去，但别让旧文件占满内存。'
+    },
+    lizi: {
+      name:'静默大山', tag:'主人格', keywords:['稳定','后劲','长期主义'],
+      line:'你平时不显山露水，关键时刻稳得让人想给你上香。',
+      analysis:'你不是急着证明自己的人，但你有非常扎实的后劲。你习惯慢慢积累、慢慢判断、慢慢把事情做稳。别人可能一开始没看见你，时间久了才发现你一直在那里，而且越来越可靠。',
+      motto:'你不用吵，山也从来不解释自己的高度。'
+    },
+    guihua: {
+      name:'暗香发电机', tag:'主人格', keywords:['低调','气质','轻轻发光'],
+      line:'你不抢镜，但存在感会像香气一样慢慢渗出来。',
+      analysis:'你有一种不太用力的吸引力。不一定非要站到中心，也不靠夸张表达制造存在感，但别人和你相处久了，会记住你的分寸、舒服和轻柔的照顾感。你常常低估自己给人的安定感。',
+      motto:'不必开远光灯，你本来就会发亮。'
+    },
+    mocha: {
+      name:'冷脸糯心怪', tag:'主人格', keywords:['反差','外冷内软','别扭可爱'],
+      line:'你看起来冷静克制，内心其实软得像刚蒸好的麻薯。',
+      analysis:'你身上有很明显的反差。刚认识时别人可能觉得你有距离感，但真正靠近后会发现你很软、很黏、很需要被懂。你不擅长直白示弱，所以常常用理性、玩笑或沉默保护自己。',
+      motto:'偶尔承认想被哄，并不会影响你继续酷。'
+    },
+    mango: {
+      name:'精神出走家', tag:'主人格', keywords:['探索','新鲜感','不安分'],
+      line:'你人还坐在原地，精神已经订好下一站车票。',
+      analysis:'你不是单一口味的人。你可以安静，也会突然被一个新想法点燃；可以稳定一阵子，也会开始想要变化。你需要生活里有新鲜感，也需要关系允许你不断长出新的自己。',
+      motto:'不是你不稳定，是你的灵魂需要偶尔放风。'
+    },
+    rose: {
+      name:'氛围显微镜', tag:'主人格', keywords:['敏感','审美','情绪价值'],
+      line:'别人只听见一句话，你已经检测到语气、温度和隐藏备注。',
+      analysis:'你对氛围、语言、态度和仪式感非常敏感。你不是要求很多，而是很清楚什么样的关系会让自己舒展，什么样的关系会让自己枯萎。你需要的不是被敷衍地需要，而是被认真地珍惜。',
+      motto:'你的敏感不是毛病，是高清模式。'
+    },
+    zisu: {
+      name:'情绪抱枕', tag:'主人格', keywords:['疗愈','柔和','稳定陪伴'],
+      line:'你不一定说很多，但待在你身边，别人会慢慢软下来。',
+      analysis:'你身上有一种安静的疗愈感。你擅长用稳定的存在感接住别人，也习惯把情绪处理得很轻，尽量不给别人添麻烦。只是温柔的人也可以有要求，也可以被照顾。',
+      motto:'抱枕也需要被抱，不是只能给别人靠。'
+    },
 
-    wuhua: { title:'生活热量型', tag:'热量', short:'热量', keywords:['真实','烟火气','生命力'], line:'你很真实，也很有生活热量，不适合把自己一直压得太清淡。', relation:'你喜欢有温度、有回应、有具体行动的关系。', lesson:'你的热烈很珍贵，不必总为了显得成熟而收起来。' },
-    danhuang: { title:'核心坚定型', tag:'核心感', short:'坚定', keywords:['原则','清醒','主心骨'], line:'你外表可以随和，但内心有很清楚的核心和不能妥协的部分。', relation:'你能照顾别人的感受，但真正重要的事情上，你会站回自己这一边。', lesson:'坚定不等于强硬，清楚表达就是一种温柔。' },
-    xianggu: { title:'深层滋味型', tag:'耐品', short:'深味', keywords:['成熟','理解力','后劲'], line:'你不是第一眼最张扬的人，但越相处越让人觉得有内容。', relation:'你看人不会只看表面，更相信时间筛选出来的关系。', lesson:'别急着证明深度，真正懂你的人会慢慢尝出来。' },
-    banli: { title:'蓄力成就型', tag:'积累', short:'成就', keywords:['踏实','目标感','耐心'], line:'你很能积累，也很能忍耐，常常在别人看不到的地方默默推进。', relation:'你不一定每天都外放热情，但会用长期行动证明自己。', lesson:'少一点自我怀疑，多一点对长期积累的信任。' },
-    ganbei: { title:'高敏洞察型', tag:'洞察', short:'洞察', keywords:['敏锐','细节控','判断力'], line:'你很容易捕捉到别人没说出口的东西，信息接收密度比一般人高。', relation:'你会注意语气、停顿和回复速度，也容易因此消耗。', lesson:'有些情绪属于别人，不必全部带回自己心里。' },
-    larou: { title:'人间烟火型', tag:'实在', short:'烟火', keywords:['现实感','爽快','具体快乐'], line:'你相信具体的陪伴、具体的关心和具体的快乐。', relation:'你不太吃虚无缥缈的承诺，更相信一个人怎么做。', lesson:'爽快之外，也可以允许自己有细腻和脆弱的时刻。' },
-    mushroom: { title:'温和弹性型', tag:'弹性', short:'弹性', keywords:['适应力','协调','柔韧'], line:'你适应力很强，能在不同关系和环境里找到自己的位置。', relation:'你擅长照顾不同人的感受，也容易成为关系里的缓冲带。', lesson:'适应环境很重要，保留自己也同样重要。' },
-    songlu: { title:'稀有审美型', tag:'稀有', short:'审美', keywords:['独特','标准','自我定义'], line:'你不太喜欢大众化的东西，有自己的偏好、标准和隐秘的骄傲。', relation:'你不一定要被所有人理解，但很希望被真正懂你的人准确看见。', lesson:'不必为了合群而降低自己的标准。' }
+    wuhua: {
+      name:'热量发动机', tag:'主人格', keywords:['真实','烟火气','生命力'],
+      line:'你是自带锅气的人，生活一冷清，你就想往里面添点火。',
+      analysis:'你很真实，也很有生命力。你不适合长期压抑自己，因为你的能量需要表达、流动和被回应。你喜欢有温度、有行动、有具体快乐的关系，不太吃冷冰冰的礼貌和空洞承诺。',
+      motto:'你的热烈不是过量，是这个世界有点太寡淡。'
+    },
+    danhuang: {
+      name:'软壳硬核蛋', tag:'主人格', keywords:['原则','主心骨','嘴软心硬'],
+      line:'你嘴上可以说都行，心里其实有一块绝对不行。',
+      analysis:'你外表可以配合，可以照顾气氛，也可以暂时退让，但这不代表你没有原则。真正重要的事情上，你很清楚自己的底线。你不是强势型的人，可一旦被碰到核心，就会突然变得非常清醒。',
+      motto:'边界说出来不叫麻烦，叫系统提示。'
+    },
+    xianggu: {
+      name:'慢煮老灵魂', tag:'主人格', keywords:['耐品','成熟','后劲'],
+      line:'你不是第一口就炸裂的人，但越煮越有味。',
+      analysis:'你属于越相处越有内容的人。你看人不只看表面，也不太容易被短暂的热闹带走。你更相信时间筛选出来的关系，也更珍惜那些不用解释太多就能理解你的人。',
+      motto:'别急着证明深度，懂的人会慢慢尝出来。'
+    },
+    banli: {
+      name:'闷声升级包', tag:'主人格', keywords:['积累','目标感','后期发力'],
+      line:'你不喊口号不立人设，但常常默默把自己练到下一版本。',
+      analysis:'你很能积累，也很能忍耐。你不一定每天都看起来斗志满满，但你知道自己在往哪里走。你习惯把大目标拆成小步骤，在别人看不到的地方一点点推进。',
+      motto:'你的进度条没坏，只是在后台加载。'
+    },
+    ganbei: {
+      name:'空气读心器', tag:'主人格', keywords:['洞察','高敏感','细节捕捉'],
+      line:'语气一变、气氛一歪、消息一晚，你的雷达已经响了。',
+      analysis:'你很容易捕捉到别人没说出口的东西。一个停顿、一次回避、一个微妙的语气变化，都可能被你接收到。你的敏感不是脆弱，而是信息接收密度太高。只是有些情绪属于别人，不必全部带回自己心里。',
+      motto:'雷达可以开，但不必全天候满功率。'
+    },
+    larou: {
+      name:'现实快刀手', tag:'主人格', keywords:['实在','爽快','反拉扯'],
+      line:'你喜欢把话落到行动上，不太想陪人玩情绪迷宫。',
+      analysis:'你相信具体的陪伴、具体的关心和具体的快乐。你不太吃虚无缥缈的承诺，更看一个人到底怎么做。你有时候显得爽快甚至直接，但心里其实很清楚谁是真心，谁只是热闹一下。',
+      motto:'真诚最好落地，别一直飘在空中。'
+    },
+    mushroom: {
+      name:'人际缓冲垫', tag:'主人格', keywords:['适应力','协调','接住尴尬'],
+      line:'你很会把冷场、尴尬和冲突接住，再悄悄放软。',
+      analysis:'你适应力很强，能在不同关系和环境里找到自己的位置。你不喜欢硬碰硬，更擅长用柔软的方式让事情继续往前走。你常常成为关系里的缓冲带，但也要记得，适应环境不等于丢掉自己。',
+      motto:'你可以缓冲世界，但别把自己垫扁。'
+    },
+    songlu: {
+      name:'小众黑洞', tag:'主人格', keywords:['独特','审美标准','神秘感'],
+      line:'你不一定大众好懂，但懂你的人会觉得你很上头。',
+      analysis:'你有自己的偏好、标准和隐秘的骄傲。你不太容易被普通热闹打动，也不喜欢被单一标签定义。你不需要很多人都懂你，但你会期待少数人懂得很准。',
+      motto:'不必为了合群，把自己的风味调淡。'
+    }
   }
 };
 
 const REPORT_OPENINGS = [
-  '你选择的这只粽子，暴露了你最近最真实的一面。',
-  '这不是一只普通的粽子，而是一份被你亲手包出来的性格切面。',
-  '你以为你在选口味，其实你也在选择自己习惯靠近世界的方式。',
-  '这只心粽最有意思的地方，是它刚好包住了你身上那些很难一句话说清的部分。'
+  '你以为你在选口味，其实你在选自己的精神出厂设置。',
+  '这只粽子最会出卖你的地方，是它把你平时藏起来的那一面包出来了。',
+  '这不是一只普通粽子，是你的性格切面扫描件。',
+  '你亲手包出的不是馅料，是一份很难不代入的自我说明书。'
 ];
 
 const REPORT_SIGNS = [
   '愿你被温柔包裹，也能稳稳长出自己的边界。',
-  '愿你不用一直证明自己，也能被准确地看见。',
+  '愿你不用一直证明自己，也能被准确看见。',
   '愿你保留自己的口味，不必为了合群变得太淡。',
-  '愿你把好吃的馅料留给自己，也把真正的心意留给值得的人。',
-  '愿你在热气腾腾的生活里，慢慢蒸出自己的香气。'
+  '愿你把真正的心意留给值得的人，也把好吃的那一口留给自己。'
 ];
 
-const state = { leaf: null, grain: null, flavor: 'sweet', fillings: [], currentMsgIndex: 0, reportVariant: 0, cardChoice: 'cross' };
+const state = { leaf: null, grain: null, flavor: 'sweet', fillings: [], reportVariant: 0, cardChoice: 'cross' };
 const el = (id) => document.getElementById(id);
 
 function renderLeafGrid(){
@@ -502,7 +591,7 @@ function syncFillingSelection(){
   if(count === 0){
     note.innerHTML = '可多选，建议不超过 <b>3 种</b>，搭配更和谐。';
   } else {
-    const names = state.fillings.map(id => [...FILLINGS.sweet, ...FILLINGS.salty].find(f=>f.id===id)?.label).filter(Boolean);
+    const names = state.fillings.map(id => getFillingById(id)?.label).filter(Boolean);
     note.innerHTML = `已选：<b>${names.join('、')}</b>`;
   }
 }
@@ -543,13 +632,11 @@ document.addEventListener('click', (e) => {
     }
   }
 
-  // 处理封面风格选择
   const choice = e.target.closest('.card-choice');
   if(choice){
     state.cardChoice = choice.dataset.choice;
     document.querySelectorAll('.card-choice').forEach(c => c.classList.remove('selected'));
     choice.classList.add('selected');
-    // 动态同步剥开区域的SVG视图预览
     el('splitZongziSvg').innerHTML = buildZongziSVG(state.cardChoice === 'cross' ? 1 : 2);
   }
 });
@@ -561,6 +648,8 @@ function showLimitMsg(msg){
   showLimitMsg._t = setTimeout(()=>{ node.textContent = ''; }, 2200);
 }
 
+function getAllFillingOptions(){ return [...FILLINGS.sweet, ...FILLINGS.salty]; }
+function getFillingById(id){ return getAllFillingOptions().find(f => f.id === id); }
 function getLeafColor(){
   const l = LEAVES.find(x => x.id === state.leaf);
   return l ? { fill: l.color, dark: l.dark } : { fill:'#C9C2AE', dark:'#A9A28F' };
@@ -569,34 +658,36 @@ function getGrainColor(){
   const g = GRAINS.find(x => x.id === state.grain);
   return g ? g.color : '#F7F3E9';
 }
+function shade(hex, percent){
+  const num = parseInt(hex.replace('#',''), 16);
+  let r = (num >> 16) + Math.round(255 * (percent/100));
+  let g = ((num >> 8) & 0x00FF) + Math.round(255 * (percent/100));
+  let b = (num & 0x0000FF) + Math.round(255 * (percent/100));
+  r = Math.max(0, Math.min(255, r));
+  g = Math.max(0, Math.min(255, g));
+  b = Math.max(0, Math.min(255, b));
+  return '#' + (0x1000000 + r*0x10000 + g*0x100 + b).toString(16).slice(1);
+}
 
-// 华丽重构：全新美化的打开状态设计
 function buildZongziSVG(visualType = 2){
   const leaf = getLeafColor();
   const hasLeaf = !!state.leaf;
   const leafFill = hasLeaf ? leaf.fill : '#5E7A4E';
   const leafDark = hasLeaf ? leaf.dark : '#3F5435';
   const leafDarkest = hasLeaf ? shade(leaf.dark, -22) : '#2A3B23';
-  
   const grainColor = getGrainColor();
   const hasGrain = !!state.grain;
 
   if (visualType === 1) {
-    // 全新美化的“半开粽子”SVG：剥开粽叶，露出软糯饱满的圆角粽身与馅料
     const bodyFill = hasGrain ? grainColor : '#F7F3E9';
     const strokeColor = shade(bodyFill, -12);
-    
-    // 映射馅料颜色，加入柔和细腻的高光感
     const speckleColors = state.fillings.slice(0,3).map((id, i) => {
       const isSalty = FILLINGS.salty.some(f=>f.id===id);
-      // 甜口：红豆/枣红/芝麻灰；咸口：蛋黄橙/鲜肉褐/香菇暗褐
       return isSalty ? ['#D46B43','#8E503A','#B57E4A'][i%3] : ['#8A3B2E','#C95A49','#5C536B'][i%3];
     });
 
     let fillingsMarkup = '';
     if(hasGrain && state.fillings.length > 0){
-      // 小配料点：不再用“大馅料圆心”，改为 7 个自然分散的小点，视觉上更像均匀嵌在米粒表面。
-      // 这些点位都落在白色粽身内部，避免贴边或聚成一团。
       const dotPositions = [
         { x: 94,  y: 82,  r: 3.1 },
         { x: 124, y: 94,  r: 2.6 },
@@ -607,7 +698,6 @@ function buildZongziSVG(visualType = 2){
         { x: 72,  y: 153, r: 2.3 }
       ];
       const chosenColors = speckleColors.length ? speckleColors : ['#8A3B2E'];
-
       dotPositions.forEach((pos, i) => {
         const c = chosenColors[i % chosenColors.length];
         const haloR = pos.r + 1.6;
@@ -629,72 +719,48 @@ function buildZongziSVG(visualType = 2){
           <stop offset="100%" stop-color="${leafDark}"/>
         </linearGradient>
       </defs>
-
       <path d="M 20,180 Q 100,5 200,180 Q 110,230 20,180 Z" fill="url(#leafGrad)" opacity="0.85" />
       <path d="M 40,195 Q 110,35 180,195" stroke="${leafDarkest}" stroke-width="1" fill="none" opacity="0.2"/>
-
       <path d="M 55,115 Q 15,130 30,195 Q 65,185 70,145 Z" fill="${leafDark}" stroke="${leafDarkest}" stroke-width="0.5"/>
       <path d="M 30,195 Q 50,140 55,115" stroke="${leafFill}" stroke-width="1" fill="none" opacity="0.4"/>
       <path d="M 160,110 Q 205,135 180,200 Q 145,190 145,150 Z" fill="${leafDarkest}" />
       <path d="M 160,110 Q 175,160 180,200" stroke="${leafFill}" stroke-width="1" fill="none" opacity="0.3"/>
-
       <path d="M 110,45 C 140,45 175,125 165,165 C 155,195 75,195 60,165 C 50,125 80,45 110,45 Z" 
             fill="${bodyFill}" stroke="${strokeColor}" stroke-width="1.5" filter="url(#softShadow)"/>
-
       <circle cx="85" cy="80" r="1.5" fill="${strokeColor}" opacity="0.4"/>
       <circle cx="140" cy="105" r="2" fill="${strokeColor}" opacity="0.3"/>
       <circle cx="115" cy="165" r="1.5" fill="${strokeColor}" opacity="0.5"/>
       <circle cx="75" cy="130" r="2" fill="${strokeColor}" opacity="0.3"/>
-
       ${fillingsMarkup}
-
       <path d="M 40,185 Q 105,215 175,190" stroke="#E5DDCB" stroke-width="2.5" fill="none" opacity="0.9"/>
       <path d="M 45,187 Q 105,217 170,192" stroke="#BFA88F" stroke-width="0.5" fill="none" opacity="0.5"/>
     `;
-  } else {
-    // 默认选项：2 经典完整四面体外壳
-    const opacity = hasLeaf ? 1 : 0.55;
-    const dash = hasLeaf ? '' : 'stroke-dasharray="5,4"';
-    const strokeColor = hasLeaf ? 'none' : '#9A9384';
-
-    return `
-      <polygon points="100,18 35,183 100,203" fill="${leafFill}" opacity="${opacity}" stroke="${strokeColor}" stroke-width="1.5" ${dash}/>
-      <polygon points="100,18 165,183 100,203" fill="${leafDark}" opacity="${opacity}" stroke="${strokeColor}" stroke-width="1.5" ${dash}/>
-      <polygon points="35,183 165,183 100,203" fill="${leafDarkest}" opacity="${opacity}"/>
-
-      ${hasLeaf ? `
-      <line x1="100" y1="18" x2="55" y2="153" stroke="${leafDarkest}" stroke-width="2" opacity="0.5"/>
-      <line x1="78" y1="58" x2="48" y2="168" stroke="${leafDarkest}" stroke-width="1.5" opacity="0.35"/>
-      <line x1="100" y1="18" x2="145" y2="153" stroke="${leafDarkest}" stroke-width="2" opacity="0.45"/>
-      <line x1="122" y1="58" x2="152" y2="168" stroke="${leafDarkest}" stroke-width="1.5" opacity="0.3"/>
-      <line x1="100" y1="18" x2="100" y2="203" stroke="${leafDarkest}" stroke-width="2" opacity="0.55"/>
-
-      <path d="M 38,108 Q 100,93 162,108" stroke="#E8DDBE" stroke-width="3.5" fill="none" opacity="0.85"/>
-      <path d="M 42,148 Q 100,136 158,148" stroke="#E8DDBE" stroke-width="3.5" fill="none" opacity="0.85"/>
-      <line x1="60" y1="43" x2="135" y2="173" stroke="#E8DDBE" stroke-width="3" opacity="0.75"/>
-
-      <path d="M100,18 Q90,3 95,-7 Q103,3 100,18 Z" fill="${leafDark}"/>
-      <circle cx="100" cy="16" r="4" fill="${leafDarkest}"/>
-      ` : `
-      <circle cx="100" cy="16" r="4" fill="none" stroke="${strokeColor}" stroke-width="1.5"/>
-      `}
-    `;
   }
-}
 
-function shade(hex, percent){
-  const num = parseInt(hex.replace('#',''), 16);
-  let r = (num >> 16) + Math.round(255 * (percent/100));
-  let g = ((num >> 8) & 0x00FF) + Math.round(255 * (percent/100));
-  let b = (num & 0x0000FF) + Math.round(255 * (percent/100));
-  r = Math.max(0, Math.min(255, r));
-  g = Math.max(0, Math.min(255, g));
-  b = Math.max(0, Math.min(255, b));
-  return '#' + (0x1000000 + r*0x10000 + g*0x100 + b).toString(16).slice(1);
+  const opacity = hasLeaf ? 1 : 0.55;
+  const dash = hasLeaf ? '' : 'stroke-dasharray="5,4"';
+  const strokeColor = hasLeaf ? 'none' : '#9A9384';
+  return `
+    <polygon points="100,18 35,183 100,203" fill="${leafFill}" opacity="${opacity}" stroke="${strokeColor}" stroke-width="1.5" ${dash}/>
+    <polygon points="100,18 165,183 100,203" fill="${leafDark}" opacity="${opacity}" stroke="${strokeColor}" stroke-width="1.5" ${dash}/>
+    <polygon points="35,183 165,183 100,203" fill="${leafDarkest}" opacity="${opacity}"/>
+    ${hasLeaf ? `
+    <line x1="100" y1="18" x2="55" y2="153" stroke="${leafDarkest}" stroke-width="2" opacity="0.5"/>
+    <line x1="78" y1="58" x2="48" y2="168" stroke="${leafDarkest}" stroke-width="1.5" opacity="0.35"/>
+    <line x1="100" y1="18" x2="145" y2="153" stroke="${leafDarkest}" stroke-width="2" opacity="0.45"/>
+    <line x1="122" y1="58" x2="152" y2="168" stroke="${leafDarkest}" stroke-width="1.5" opacity="0.3"/>
+    <line x1="100" y1="18" x2="100" y2="203" stroke="${leafDarkest}" stroke-width="2" opacity="0.55"/>
+    <path d="M 38,108 Q 100,93 162,108" stroke="#E8DDBE" stroke-width="3.5" fill="none" opacity="0.85"/>
+    <path d="M 42,148 Q 100,136 158,148" stroke="#E8DDBE" stroke-width="3.5" fill="none" opacity="0.85"/>
+    <line x1="60" y1="43" x2="135" y2="173" stroke="#E8DDBE" stroke-width="3" opacity="0.75"/>
+    <path d="M100,18 Q90,3 95,-7 Q103,3 100,18 Z" fill="${leafDark}"/>
+    <circle cx="100" cy="16" r="4" fill="${leafDarkest}"/>
+    ` : `<circle cx="100" cy="16" r="4" fill="none" stroke="${strokeColor}" stroke-width="1.5"/>`}
+  `;
 }
 
 function updatePreview(){
-  el('zongziSvg').innerHTML = buildZongziSVG(2); // 首页始终显示包裹完好形态
+  el('zongziSvg').innerHTML = buildZongziSVG(2);
   const steps = [state.leaf, state.grain, state.fillings.length>0].filter(Boolean).length;
   const pct = Math.round((steps/3)*100);
   el('progressFill').style.width = pct + '%';
@@ -712,9 +778,9 @@ function computeNameAndTags(){
     return { name:'还未命名', tags:'先从下面选一片粽叶吧' };
   }
   const grainObj = GRAINS.find(g=>g.id===state.grain);
-  const fillingObjs = state.fillings.map(id => [...FILLINGS.sweet, ...FILLINGS.salty].find(f=>f.id===id)).filter(Boolean);
-  let namePart = fillingObjs.length ? fillingObjs.map(f=>f.label.replace(/[泥酱蜜]/g,'')).join('') : '';
-  let grainPart = grainObj ? grainObj.label.replace('圆粒','').replace('杂粮','') : '';
+  const fillingObjs = state.fillings.map(getFillingById).filter(Boolean);
+  const namePart = fillingObjs.length ? fillingObjs.map(f=>f.label.replace(/[泥酱蜜]/g,'')).join('') : '';
+  const grainPart = grainObj ? grainObj.label.replace('圆粒','').replace('杂粮','') : '';
   let name = '';
   if(namePart && grainPart) name = `${grainPart}${namePart}粽`;
   else if(namePart) name = `${namePart}粽`;
@@ -738,7 +804,7 @@ function startSteaming(){
   btn.disabled = true;
   const originalText = btn.textContent;
   let pct = 0;
-  btn.textContent = '蒸煮中… 0%';
+  btn.textContent = '人格蒸煮中… 0%';
   const interval = setInterval(() => {
     pct += Math.random()*18 + 8;
     if(pct >= 100){
@@ -746,118 +812,153 @@ function startSteaming(){
       clearInterval(interval);
       btn.textContent = '出锅啦';
       setTimeout(() => { 
-        // 隐藏包粽子工作台，展现解开发现阶段
         el('diyStage').style.display = 'none';
         el('peelingStage').classList.add('show');
-        // 默认显示切面视图
         el('splitZongziSvg').innerHTML = buildZongziSVG(state.cardChoice === 'cross' ? 1 : 2);
         btn.textContent = originalText; 
         btn.disabled = false; 
       }, 450);
     } else {
-      btn.textContent = `蒸煮中… ${Math.floor(pct)}%`;
+      btn.textContent = `人格蒸煮中… ${Math.floor(pct)}%`;
     }
   }, 220);
 }
 
-function getAllFillingOptions(){
-  return [...FILLINGS.sweet, ...FILLINGS.salty];
-}
+function uniqueList(arr){ return [...new Set(arr.filter(Boolean))]; }
+function pickFrom(arr, offset = 0){ return arr[(state.reportVariant + offset) % arr.length]; }
 
-function getFillingById(id){
-  return getAllFillingOptions().find(f => f.id === id);
-}
 
-function getFillingProfile(id){
-  return PERSONA_PROFILES.fillings[id];
-}
+function hasFilling(id){ return state.fillings.includes(id); }
+function hasAnyFilling(ids){ return ids.some(id => hasFilling(id)); }
 
-function uniqueList(arr){
-  return [...new Set(arr.filter(Boolean))];
-}
+function computeRarity(primary){
+  // 稀有度不是随机抽卡，而是由“配料组合的复杂度 + 稀有性格信号”计算出来。
+  // N：常规人格；R：进阶人格；SSR：隐藏人格。
+  let score = 0;
 
-function pickFrom(arr, offset = 0){
-  return arr[(state.reportVariant + offset) % arr.length];
-}
+  // 馅料越多，人格越复合。
+  score += state.fillings.length === 1 ? 8 : state.fillings.length === 2 ? 22 : 36;
 
-function buildPersonaType(grainProfile, fillingProfiles){
-  if(fillingProfiles.length === 1){ return fillingProfiles[0].title; }
-  if(fillingProfiles.length === 2){ return `${fillingProfiles[0].short}${fillingProfiles[1].short}型人格`; }
-  if(fillingProfiles.length >= 3){ return `${grainProfile.prefix}${fillingProfiles[0].short}复合型人格`; }
-  return grainProfile.title;
-}
+  // 这些配料在报告里代表更强的反差、洞察、小众审美或高敏信号。
+  const rareWeight = {
+    songlu: 22, ganbei: 18, rose: 16, mocha: 15, mango: 14,
+    danhuang: 13, larou: 11, guihua: 10, zimi: 8, sigu: 8, yanmai: 7
+  };
+  [state.leaf, state.grain, ...state.fillings].forEach(id => { score += rareWeight[id] || 0; });
 
-function buildFillingAnalysis(fillingProfiles){
-  if(fillingProfiles.length === 1){
-    const f = fillingProfiles[0];
-    return `你最鲜明的性格切面来自「${f.tag}」。${f.line}${f.relation}`;
+  // 特殊组合：更像“隐藏人格触发条件”。
+  const comboHit =
+    (state.leaf === 'sigu' && state.grain === 'zimi' && hasAnyFilling(['songlu','ganbei','rose'])) ||
+    (state.grain === 'yanmai' && hasAnyFilling(['songlu','larou','ganbei']) && state.fillings.length >= 2) ||
+    (hasFilling('mocha') && hasFilling('rose')) ||
+    (hasFilling('danhuang') && hasFilling('ganbei')) ||
+    (hasFilling('songlu') && state.fillings.length >= 2);
+  if(comboHit) score += 26;
+
+  if(score >= 74){
+    return {
+      code:'SSR', cls:'ssr', label:'SSR隐藏人格', rate:'稀有度 5%',
+      line:`你这套组合不是普通出厂设置，是「${primary.name}」的隐藏版。别人以为你只是有点特别，其实你是多层系统叠加。`
+    };
   }
-  if(fillingProfiles.length === 2){
-    const [a,b] = fillingProfiles;
-    return `你身上有两股能量：一股是「${a.tag}」，${a.line}另一股是「${b.tag}」，${b.line}这让你经常呈现出一种双层气质：既想被理解，也想保留自己的节奏；既能照顾别人，也希望有人读懂你的用心。`;
+  if(score >= 42){
+    return {
+      code:'R', cls:'r', label:'R进阶人格', rate:'稀有度 23%',
+      line:`你不是单一口味的人，「${primary.name}」只是表层识别结果，真正靠近后会发现你还有很多隐藏参数。`
+    };
   }
-  const [a,b,c] = fillingProfiles;
-  return `你的性格不是单一口味，而是三种力量叠在一起：${a.tag}代表你的情绪底色，${b.tag}代表你的关系模式，${c.tag}代表你最近正在长出的新方向。所以你有时看起来很好懂，有时又会突然变得很有边界、很有主见。`;
-}
-
-function buildRelationshipLine(fillingProfiles, grainProfile){
-  const fragments = fillingProfiles.map(f => f.relation);
-  const main = fragments.length ? fragments.join('') : '你在关系里看重稳定、真诚和舒服的互动。';
-  return `${main}你真正需要的不是一直热闹，而是${grainProfile.need}。`;
-}
-
-function buildLessonLine(leafProfile, fillingProfiles){
-  const lessons = fillingProfiles.map(f => f.lesson);
-  const selected = lessons.length ? pickFrom(lessons, 1) : leafProfile.lesson;
-  return `${selected} ${leafProfile.lesson}。`;
-}
-
-function buildPersonaReport(){
-  const { name } = computeNameAndTags();
-  const leafProfile = PERSONA_PROFILES.leaves[state.leaf];
-  const grainProfile = PERSONA_PROFILES.grains[state.grain];
-  const fillingProfiles = state.fillings.map(getFillingProfile).filter(Boolean);
-  const fillingNames = state.fillings.map(id => getFillingById(id)?.label).filter(Boolean);
-  const personaType = buildPersonaType(grainProfile, fillingProfiles);
-  const keywords = uniqueList([
-    leafProfile.tag,
-    grainProfile.tag,
-    ...fillingProfiles.flatMap(f => f.keywords)
-  ]).slice(0, 6);
-
-  const flavorLine = state.flavor === 'sweet'
-    ? '你选择的是甜口，说明你很重视关系里的柔软、回应和情绪价值。你并不是只想要甜，而是希望生活里那些辛苦的部分，也能被一点点温柔中和。'
-    : '你选择的是咸口，说明你更相信真实、行动和生活里的具体分量。比起漂亮话，你更在意一个人是否真的可靠，是否能把关心落到实处。';
-
-  const opening = pickFrom(REPORT_OPENINGS);
-  const sign = pickFrom(REPORT_SIGNS, 2);
-  const fillingAnalysis = buildFillingAnalysis(fillingProfiles);
-  const relationLine = buildRelationshipLine(fillingProfiles, grainProfile);
-  const lessonLine = buildLessonLine(leafProfile, fillingProfiles);
-
-  const hitLine = `你看起来${leafProfile.face}，但真正靠近你的人会发现，你的内在其实是${grainProfile.core}的。你不是没有情绪，只是习惯先把它包好、蒸熟，再用比较体面的方式端出来。`;
-
-  const text = [
-    `【一句话命中】\n${opening}${hitLine}`,
-    `【外在气质】\n${leafProfile.report}`,
-    `【内在底色】\n${grainProfile.report}`,
-    `【人格配方】\n${flavorLine}${fillingNames.length ? `你选择的馅料是「${fillingNames.join('、')}」，这组搭配让你的心粽人格多了一层很具体的味道。` : ''}${fillingAnalysis}`,
-    `【关系模式】\n${relationLine}`,
-    `【隐藏课题】\n${lessonLine}`,
-    `【今日心粽签】\n${sign}`
-  ].join('\n\n');
-
   return {
-    title: `${name}｜${personaType}`,
-    tags: keywords.join(' · '),
-    keyword: `人格关键词：${keywords.join(' / ')}`,
-    text
+    code:'N', cls:'n', label:'N常规人格', rate:'稀有度 72%',
+    line:`你这套人格信号很清晰，「${primary.name}」就是最稳定也最容易被别人感受到的那一面。`
   };
 }
 
-el('generateCardBtn').addEventListener('click', () => {
-  openCard();
-});
+function buildXhsTitle(report){
+  const main = report.primary.name;
+  const rarity = report.rarity.code;
+  const keyword = report.keywords[0] || '人格';
+  const { name: zongziName } = computeNameAndTags();
+  const templates = [
+    `笑死，包个粽子测出我是「${main}」`,
+    `这只${zongziName}把我人格扒出来了：${main}`,
+    `端午版MBTI也太会了，我居然是「${main}」`,
+    `朋友说我这个「${main}」人格准到离谱`,
+    `测出${rarity}级心粽人格：${main}，有点被冒犯但很准`,
+    `原来我不是想太多，我是「${main}」`,
+    `我不允许只有我一个人测这个心粽人格`,
+    `我的端午人格报告：${main} / ${keyword} / 真的很像我`
+  ];
+  return pickFrom(templates, 1);
+}
+
+function buildPersonaReport(){
+  const { name: zongziName } = computeNameAndTags();
+  const leafProfile = PERSONA.leaves[state.leaf];
+  const grainProfile = PERSONA.grains[state.grain];
+  const fillingProfiles = state.fillings.map(id => PERSONA.fillings[id]).filter(Boolean);
+  const primary = fillingProfiles[0] || grainProfile;
+  const extraFillings = fillingProfiles.slice(1);
+  const allLabels = [leafProfile.name, grainProfile.name, ...fillingProfiles.map(f=>f.name)];
+  const keywords = uniqueList([...leafProfile.keywords, ...grainProfile.keywords, ...fillingProfiles.flatMap(f=>f.keywords)]).slice(0, 7);
+  const opening = pickFrom(REPORT_OPENINGS);
+  const sign = pickFrom(REPORT_SIGNS, 2);
+
+  const flavorLine = state.flavor === 'sweet'
+    ? '你选的是甜口，说明你很吃“情绪价值”和“被认真对待”这一套。你不一定只想要甜，而是希望生活里那些辛苦的部分，能被一点点温柔中和。'
+    : '你选的是咸口，说明你更相信真实、行动和具体分量。比起漂亮话，你更在意一个人是否真的可靠，是否能把关心落到实处。';
+
+  let comboLine = '';
+  if(extraFillings.length === 0){
+    comboLine = `你的主人格很集中，就是「${primary.name}」。${primary.line}`;
+  } else if(extraFillings.length === 1){
+    comboLine = `你的主人格是「${primary.name}」，但还叠了一层「${extraFillings[0].name}」。所以你不是单一口味的人：一边${primary.line.replace('你','')}一边也带着${extraFillings[0].line.replace('你','')}`;
+  } else {
+    comboLine = `你的主人格是「${primary.name}」，隐藏属性还叠了「${extraFillings.map(f=>f.name).join('」和「')}」。这属于三拼复合人格：别人以为你很好概括，实际上你是多线程运行。`;
+  }
+
+  const hiddenLine = extraFillings.length
+    ? `隐藏属性：${extraFillings.map(f => `「${f.name}」`).join('、')}。${extraFillings.map(f=>f.motto).join(' ')}`
+    : `隐藏属性：你这次的性格信号很纯，几乎没有杂音。${primary.motto}`;
+
+  const rarity = computeRarity(primary);
+
+  const text = [
+    `【一句话命中】
+${opening}
+${primary.line}`,
+    `【稀有度判定】
+${rarity.label} · ${rarity.rate}
+${rarity.line}`,
+    `【你的外壳】
+${leafProfile.one}
+${leafProfile.report}`,
+    `【你的内核】
+${grainProfile.one}
+${grainProfile.report}`,
+    `【人格配方】
+${flavorLine}
+${comboLine}`,
+    `【为什么像你】
+${primary.analysis}`,
+    `【隐藏属性】
+${hiddenLine}`,
+    `【今日心粽签】
+${sign}`
+  ].join('\n\n');
+
+  const report = {
+    title: `你的心粽人格：${primary.name}`,
+    tags: `${zongziName} · ${allLabels.join(' × ')}`,
+    keyword: `人格关键词：${keywords.join(' / ')}`,
+    text,
+    primary,
+    keywords,
+    rarity
+  };
+  report.shareTitle = buildXhsTitle(report);
+  return report;
+}
+el('generateCardBtn').addEventListener('click', () => openCard());
 
 function openCard(){
   state.reportVariant = Math.floor(Math.random() * REPORT_OPENINGS.length);
@@ -874,6 +975,9 @@ function renderCard(){
   el('cardTags').textContent = report.tags;
   el('cardMsg').textContent = report.text;
   el('cardKeyword').textContent = report.keyword;
+  el('rarityPill').textContent = `${report.rarity.label} · ${report.rarity.rate}`;
+  el('rarityPill').className = `rarity-pill ${report.rarity.cls}`;
+  el('shareTitle').innerHTML = `<span>分享</span>${report.shareTitle}`;
 }
 
 el('rerollBtn').addEventListener('click', () => {
@@ -881,7 +985,16 @@ el('rerollBtn').addEventListener('click', () => {
   renderCard();
 });
 
-// 重置回首页，还原状态
+el('copyTitleBtn').addEventListener('click', async () => {
+  const title = buildPersonaReport().shareTitle;
+  try{
+    await navigator.clipboard.writeText(title);
+    showToast('分享标题已复制');
+  }catch(err){
+    showToast('复制失败，可以手动复制卡片标题');
+  }
+});
+
 el('closeBtn').addEventListener('click', () => {
   el('overlay').classList.remove('show');
   el('peelingStage').classList.remove('show');
@@ -889,20 +1002,18 @@ el('closeBtn').addEventListener('click', () => {
   resetWorkflow();
 });
 
-function resetWorkflow() {
+function resetWorkflow(){
   state.leaf = null;
   state.grain = null;
+  state.flavor = 'sweet';
   state.fillings = [];
   state.cardChoice = 'cross';
-  state.reportVariant = 0;
-  
-  document.querySelectorAll('.opt').forEach(n => n.classList.remove('selected'));
-  document.querySelectorAll('.card-choice').forEach((c, idx) => {
-    c.classList.toggle('selected', idx === 0);
-  });
-  
+  document.querySelectorAll('.opt').forEach(n => n.classList.remove('selected','salty'));
+  document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
+  document.querySelector('.ftab.sweet').classList.add('active');
+  document.querySelectorAll('.card-choice').forEach((c, idx) => c.classList.toggle('selected', idx === 0));
+  renderFillingGrid();
   updatePreview();
-  syncFillingSelection();
 }
 
 el('overlay').addEventListener('click', (e) => { 
@@ -915,10 +1026,10 @@ el('saveBtn').addEventListener('click', async () => {
   try{
     const canvas = await html2canvas(card, { scale: 2, backgroundColor: '#FFFFFF', useCORS:true });
     const link = document.createElement('a');
-    link.download = `心粽人格卡-${computeNameAndTags().name}.png`;
+    link.download = `心粽人格卡-${buildPersonaReport().title.replace(/[\\/:*?"<>|]/g,'')}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
-    showToast('已保存到本地，把你的人格卡分享给朋友吧');
+    showToast('已保存到本地，分享给朋友吧');
   }catch(err){
     showToast('保存失败，长按卡片截图也可以哦');
   }
@@ -933,13 +1044,11 @@ function showToast(msg){
 }
 
 const earnedBadges = new Set();
-let steamCount = 0;
 function checkBadges(){
-  steamCount += 1;
   if(state.fillings.length >= 3){ earnedBadges.add('triple'); }
   if(state.grain === 'yanmai'){ earnedBadges.add('healthy'); }
   const order = ['triple','healthy'];
-  const labels = { triple:'三拼馅料师', healthy:'轻盈生活家' };
+  const labels = { triple:'三拼人格体', healthy:'低耗生活家' };
   el('badgeRow').innerHTML = order.filter(b => earnedBadges.has(b))
     .map(b => `<span class="badge">${labels[b]}</span>`).join('');
 }
@@ -949,6 +1058,5 @@ renderGrainGrid();
 renderFillingGrid();
 updatePreview();
 </script>
-
 </body>
 </html>
