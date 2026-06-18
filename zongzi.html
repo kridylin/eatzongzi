@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>包一只心粽 · K心理</title>
+<style>
+  :root{
+    --rice: #FBF6EC;
+    --paper: #FFFFFF;
+    --leaf: #4A6741;
+    --leaf-light: #E8F0E3;
+    --leaf-mid: #7A9470;
+    --clay: #C25B3A;
+    --clay-light: #FBEAE2;
+    --ink: #2B2620;
+    --ink-soft: #6E6658;
+    --line: #E5DDCB;
+    --radius: 16px;
+  }
+
+  *{box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
+
+  body{
+    margin:0;
+    background: var(--rice);
+    color: var(--ink);
+    font-family: "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;
+    min-height: 100vh;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration: 0.01ms !important; transition-duration: 0.01ms !important;}
+  }
+
+  header{
+    text-align:center;
+    padding: 48px 24px 32px;
+    border-bottom: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .eyebrow{
+    font-size: 13px; letter-spacing: 0.25em; color: var(--leaf);
+    font-weight: 700; margin-bottom: 14px;
+  }
+  h1{
+    font-size: clamp(30px, 7vw, 44px);
+    font-weight: 800;
+    margin: 0 0 14px;
+    letter-spacing: 0.02em;
+  }
+  h1 .accent{ color: var(--clay); }
+  .sub{
+    max-width: 480px; margin: 0 auto; color: var(--ink-soft);
+    font-size: 15px; line-height: 1.8;
+  }
+
+  main{
+    max-width: 640px; margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+
+  /* ---------- preview block ---------- */
+  .preview-card{
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 28px 20px 24px;
+    text-align:center;
+    margin-bottom: 32px;
+  }
+  .mat{
+    background: var(--leaf-light);
+    border-radius: 14px;
+    padding: 20px;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom: 16px;
+  }
+  #zongziSvg{ width: 100%; max-width: 180px; height: auto; }
+  .preview-name{ font-size: 21px; font-weight: 800; margin-bottom: 6px; }
+  .preview-tags{ font-size: 13px; color: var(--ink-soft); min-height:18px; margin-bottom:18px; }
+  .progress-track{
+    height:6px; background: var(--line); border-radius: 4px; overflow:hidden; margin-bottom:8px;
+  }
+  .progress-fill{
+    height:100%; width:0%; background: var(--leaf);
+    border-radius:4px; transition: width 0.4s ease;
+  }
+  .progress-text{ font-size:12px; color: var(--ink-soft); margin-bottom:18px; }
+  .steam-btn{
+    width:100%; padding: 16px;
+    background: var(--leaf); color: #fff; border:none; border-radius: 12px;
+    font-size: 16px; font-weight: 800; letter-spacing: 0.03em; cursor:pointer;
+    font-family: inherit;
+  }
+  .steam-btn:disabled{ background: #C8C2B2; cursor: not-allowed; }
+  .steam-btn:not(:disabled):active{ transform: scale(0.98); }
+  .limit-msg{ font-size:12px; color: var(--clay); margin-top:10px; min-height:14px; font-weight:600; }
+
+  /* ---------- step sections ---------- */
+  .step{ margin-bottom: 36px; }
+  .step-head{ display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+  .step-badge{
+    width:26px; height:26px; border-radius:50%; background: var(--ink);
+    color:#fff; font-size:13px; font-weight:800;
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .step-title{ font-size: 19px; font-weight:800; }
+  .step-hint{ font-size: 12.5px; color: var(--ink-soft); margin-left:auto; }
+
+  .opt-grid{ display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; }
+  @media (max-width: 420px){
+    .opt-grid{ grid-template-columns: repeat(2, 1fr); }
+  }
+  .opt{
+    cursor:pointer; border-radius: 14px;
+    border: 2px solid var(--line); background: var(--paper);
+    padding: 16px 8px 14px; text-align:center;
+    transition: border-color 0.15s ease, background 0.15s ease;
+    user-select:none;
+  }
+  .opt .ic{
+    font-size: 26px; display:flex; align-items:center; justify-content:center;
+    width:44px; height:44px; margin:0 auto 8px;
+    border-radius:50%; background: var(--leaf-light);
+  }
+  .opt .lb{ font-size: 14px; font-weight:700; line-height:1.3; }
+  .opt .sub-lb{ font-size: 11px; color: var(--ink-soft); margin-top:3px; display:block; }
+  .opt.selected{ border-color: var(--leaf); background: var(--leaf-light); }
+  .opt.selected .ic{ background: var(--leaf); color:#fff; }
+  .opt.selected.salty{ border-color: var(--clay); background: var(--clay-light); }
+  .opt.selected.salty .ic{ background: var(--clay); }
+
+  .filling-tabs{ display:flex; gap:8px; margin-bottom:14px; }
+  .ftab{
+    flex:1; padding:12px; border-radius:12px; text-align:center; font-size:14px; font-weight:800;
+    cursor:pointer; border:2px solid var(--line); background: var(--paper); color: var(--ink-soft);
+  }
+  .ftab.active.sweet{ background: var(--leaf); border-color: var(--leaf); color:#fff; }
+  .ftab.active.salty{ background: var(--clay); border-color: var(--clay); color:#fff; }
+
+  .filling-note{
+    font-size:13px; color: var(--ink-soft); margin-top:12px; line-height:1.6;
+    padding: 10px 14px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px;
+  }
+  .filling-note b{ color: var(--ink); }
+
+  /* ---------- peeling stage ---------- */
+  .peeling-stage{ display:none; text-align:center; padding: 10px 0 30px; }
+  .peeling-stage.show{ display:flex; flex-direction:column; align-items:center; }
+  
+  .split-zongzi-wrap{
+    background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 30px; display: flex; align-items: center; justify-content: center;
+    width: 100%; max-width: 320px; margin: 0 auto 24px;
+  }
+  .split-zongzi-wrap svg{ width:100%; max-width: 200px; height:auto; }
+
+  .split-actions{ width:100%; max-width:400px; margin: 0 auto; }
+  .action-title{ font-size:14px; font-weight: 700; color: var(--ink-soft); margin-bottom: 12px; }
+  .card-choice-group{ display:flex; gap:12px; margin-bottom: 24px; }
+  
+  .card-choice{
+    flex:1; padding: 16px; border-radius:14px; border: 2px solid var(--line);
+    background: var(--paper); cursor:pointer; text-align:center;
+    transition: all 0.2s ease; user-select: none;
+  }
+  .card-choice:active{ transform: scale(0.98); }
+  .card-choice.selected{ border-color: var(--clay); background: var(--clay-light); }
+  .card-choice .ic{ font-size: 24px; margin-bottom: 6px; display:block; }
+  .card-choice .lb{ font-size: 14px; font-weight:800; color: var(--ink); display:block;}
+  
+  .final-btn{
+    width:100%; padding: 16px; background: var(--clay); color: #fff;
+    border:none; border-radius: 12px; font-size: 16px; font-weight: 800;
+    letter-spacing: 0.03em; cursor:pointer; font-family: inherit;
+  }
+  .final-btn:active{ transform: scale(0.98); }
+
+  footer{
+    text-align:center; padding: 30px 20px 50px;
+    color: var(--ink-soft); font-size:12.5px; line-height:1.8;
+    border-top: 1px solid var(--line);
+  }
+
+  /* ---------- card modal ---------- */
+  .overlay{
+    position: fixed; inset:0; background: rgba(43,38,32,0.6);
+    display:flex; align-items:center; justify-content:center; z-index: 50;
+    padding: 20px; opacity:0; pointer-events:none; transition: opacity 0.25s ease;
+  }
+  .overlay.show{ opacity:1; pointer-events:auto; }
+  .card-wrap{
+    width:100%; max-width: 360px; transform: scale(0.94); transition: transform 0.3s ease;
+    max-height: 92vh; overflow-y: auto;
+  }
+  .overlay.show .card-wrap{ transform: scale(1); }
+
+  #shareCard{
+    width:100%; border-radius: 20px; position:relative; overflow:hidden;
+    background: var(--paper); border: 1px solid var(--line);
+    display:flex; flex-direction:column; align-items:center;
+    padding: 28px 24px 24px;
+  }
+  .card-brand{ font-size:11px; letter-spacing:0.2em; color: var(--leaf); font-weight:800; margin-bottom: 16px; }
+  .card-svg-wrap{ width: 120px; margin-bottom: 14px; }
+  .card-svg-wrap svg{ width:100%; height:auto; }
+  .card-name{ font-size: 20px; font-weight:800; margin-bottom: 4px; text-align:center;}
+  .card-tags{ font-size:12px; color: var(--ink-soft); margin-bottom:18px; text-align:center; }
+  .card-divider{ width:32px; height:3px; background: var(--clay); border-radius:2px; margin-bottom:18px; }
+  .card-msg{
+    font-size: 15px; line-height:1.9; text-align:center;
+    color: var(--ink); padding: 0 2px; font-weight:600;
+  }
+  .card-keyword{
+    margin-top:16px; font-size: 11.5px; color: var(--clay); letter-spacing:0.08em; font-weight:800;
+  }
+  .card-footer{ margin-top: 16px; font-size: 10.5px; color: var(--ink-soft); letter-spacing:0.08em; }
+
+  .card-actions{ display:flex; gap:10px; margin-top:16px; }
+  .card-actions button{
+    flex:1; padding:14px; border-radius:12px; border:none; font-size:14px; font-weight:800;
+    cursor:pointer; font-family: inherit;
+  }
+  .card-actions button:active{ transform: scale(0.97); }
+  .btn-reroll{ background: var(--paper); color: var(--ink); border: 2px solid var(--line) !important; }
+  .btn-save{ background: var(--leaf); color: #fff; }
+  .btn-close{
+    display:block; margin: 14px auto 0; background:none; border:none; color: rgba(255,255,255,0.9);
+    font-size: 13.5px; cursor:pointer; font-family: inherit; font-weight:700;
+  }
+
+  .badge-row{ display:flex; flex-wrap:wrap; gap:8px; margin-top: 14px; justify-content:center; }
+  .badge{
+    font-size: 11.5px; padding: 6px 13px; border-radius: 999px;
+    background: var(--leaf-light); color: var(--leaf); font-weight:700;
+    border: 1px solid var(--leaf-mid);
+  }
+
+  .toast{
+    position: fixed; bottom: 28px; left:50%; transform: translateX(-50%) translateY(20px);
+    background: var(--ink); color: var(--rice); padding: 13px 24px; border-radius: 999px;
+    font-size: 13.5px; font-weight:600; z-index: 60; opacity:0; pointer-events:none; transition: all 0.3s ease;
+  }
+  .toast.show{ opacity:1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">K心理 · 端午心粽工坊</div>
+  <h1>包一只<span class="accent">心粽</span></h1>
+  <p class="sub">挑一片粽叶，选一把米，填一份心意。<br>蒸煮的不局限于糯米，也是这段时间里，你想被好好对待的自己。</p>
+</header>
+
+<main>
+
+  <div id="diyStage">
+    <div class="preview-card">
+      <div class="mat">
+        <svg id="zongziSvg" viewBox="0 0 220 240" xmlns="http://www.w3.org/2000/svg"></svg>
+      </div>
+      <div class="preview-name" id="previewName">还未命名</div>
+      <div class="preview-tags" id="previewTags">先从下面选一片粽叶吧</div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-text" id="progressText">0 / 3 步</div>
+      <button class="steam-btn" id="steamBtn" disabled>选齐粽叶 · 主料 · 馅料</button>
+      <div class="limit-msg" id="limitMsg"></div>
+    </div>
+
+    <div class="step" data-step="leaf">
+      <div class="step-head">
+        <span class="step-badge">1</span>
+        <span class="step-title">选粽叶</span>
+        <span class="step-hint">决定外形与香气</span>
+      </div>
+      <div class="opt-grid" id="leafGrid"></div>
+    </div>
+
+    <div class="step" data-step="grain">
+      <div class="step-head">
+        <span class="step-badge">2</span>
+        <span class="step-title">选主料</span>
+        <span class="step-hint">决定底色与质感</span>
+      </div>
+      <div class="opt-grid" id="grainGrid"></div>
+    </div>
+
+    <div class="step" data-step="filling">
+      <div class="step-head">
+        <span class="step-badge">3</span>
+        <span class="step-title">选馅料</span>
+        <span class="step-hint">最多选 3 种</span>
+      </div>
+      <div class="filling-tabs">
+        <div class="ftab sweet active" data-flavor="sweet">甜 · 温暖自洽</div>
+        <div class="ftab salty" data-flavor="salty">咸 · 踏实丰盈</div>
+      </div>
+      <div class="opt-grid" id="fillingGrid"></div>
+      <div class="filling-note" id="fillingNote">可多选，建议不超过 3 种，搭配更和谐。</div>
+    </div>
+  </div>
+
+  <div class="peeling-stage" id="peelingStage">
+    <div class="eyebrow" style="margin-bottom: 20px;">热气腾腾！心粽已经出锅 ♨️</div>
+    <div class="split-zongzi-wrap">
+      <svg id="splitZongziSvg" viewBox="0 0 220 240" xmlns="http://www.w3.org/2000/svg"></svg>
+    </div>
+    
+    <div class="split-actions">
+      <div class="action-title">为你包的心粽选择一张封面款式：</div>
+      <div class="card-choice-group">
+        <div class="card-choice selected" data-choice="cross">
+          <span class="ic">✂️</span>
+          <span class="lb">半开切面</span>
+        </div>
+        <div class="card-choice" data-choice="wrapped">
+          <span class="ic">🌿</span>
+          <span class="lb">完好包裹</span>
+        </div>
+      </div>
+      <button class="final-btn" id="generateCardBtn">生成心粽卡片</button>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  每一只粽子配一句心意卡片 · 蒸好后可保存图片或分享给朋友<br>
+  端午安康 · K心理
+</footer>
+
+<div class="overlay" id="overlay">
+  <div class="card-wrap">
+    <div id="shareCard">
+      <div class="card-brand">K 心 理 · 心 粽 卡</div>
+      <div class="card-svg-wrap" id="cardSvgWrap"></div>
+      <div class="card-name" id="cardName"></div>
+      <div class="card-tags" id="cardTags"></div>
+      <div class="card-divider"></div>
+      <div class="card-msg" id="cardMsg"></div>
+      <div class="card-keyword" id="cardKeyword"></div>
+      <div class="card-footer">端午安康 · 愿你如粽，外柔内韧</div>
+      <div class="badge-row" id="badgeRow"></div>
+    </div>
+    <div class="card-actions">
+      <button class="btn-reroll" id="rerollBtn">换一句话</button>
+      <button class="btn-save" id="saveBtn">保存图片</button>
+    </div>
+    <button class="btn-close" id="closeBtn">重新包一只</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+const LEAVES = [
+  { id:'ruoye', label:'箬叶', sub:'江南清香', color:'#5E7A4E', dark:'#3F5435', icon:'🍃' },
+  { id:'luwei', label:'芦苇叶', sub:'北方质朴', color:'#7A8C4E', dark:'#566338', icon:'🌾' },
+  { id:'sigu',  label:'簕古叶', sub:'果香独特', color:'#6E8060', dark:'#4A5A40', icon:'🌿' },
+];
+
+const GRAINS = [
+  { id:'nuomi',  label:'圆粒糯米', sub:'软糯绵密', color:'#F7F3E9' },
+  { id:'zimi',   label:'紫米',     sub:'沉静厚实', color:'#4A3745' },
+  { id:'yanmai', label:'燕麦杂粮', sub:'轻盈清朗', color:'#DECDA8' },
+];
+
+const FILLINGS = {
+  sweet: [
+    { id:'dousha',  label:'红豆沙', icon:'🫘' },
+    { id:'hongzao',  label:'红枣黑加仑', icon:'🍇' },
+    { id:'lizi',     label:'栗子黑芝麻', icon:'🌰' },
+    { id:'guihua',   label:'桂花蜜', icon:'🌼' },
+    { id:'mocha',    label:'抹茶麻薯', icon:'🍵' },
+    { id:'mango',    label:'紫米芒果', icon:'🥭' },
+    { id:'rose',     label:'玫瑰鲜花', icon:'🌹' },
+    { id:'zisu',     label:'紫薯泥', icon:'🍠' },
+  ],
+  salty: [
+    { id:'wuhua',   label:'五花肉', icon:'🥓' },
+    { id:'danhuang', label:'咸蛋黄', icon:'🥚' },
+    { id:'xianggu', label:'香菇', icon:'🍄' },
+    { id:'banli',   label:'板栗', icon:'🌰' },
+    { id:'ganbei',  label:'虾米干贝', icon:'🦐' },
+    { id:'larou',   label:'腊肠', icon:'🌭' },
+    { id:'mushroom',label:'杏鲍菇珍珠菇', icon:'🍄' },
+    { id:'songlu',  label:'黑松露酱', icon:'🖤' },
+  ]
+};
+
+const MESSAGES = {
+  sweet: [
+    { text:"像挑选粽叶一样，选择善待自己的情绪。像包裹糯米一样，温柔接纳不完美。像等待蒸煮一样，给成长留出时间。", kw:"正念 · 接纳" },
+    { text:"粽叶包裹的不只是馅料，更是人与人之间的牵挂。感恩端午，让我们在忙碌中停下，品尝一口柔软。", kw:"感恩 · 联结" },
+    { text:"红枣的甜，来自日光照耀；你内心的甜，来自你对自己的呵护。", kw:"自我关怀" },
+    { text:"糯米经过浸泡变得柔软，人心经过允许变得豁达。愿你如粽，外柔内韧。", kw:"柔软的力量" },
+    { text:"不必把每一颗豆沙都熬到完美，生活本就允许一点点粗糙的甜。", kw:"自我宽容" },
+    { text:"你不需要时刻发光，偶尔像桂花一样，静静地香一点点，就很好。", kw:"自洽" },
+  ],
+  salty: [
+    { text:"咸蛋黄象征坚定的核心，五花肉代表生活的油脂。丰盈的人生，需要刚柔并济。", kw:"内在丰盈" },
+    { text:"蒸煮是粽子的蜕变，忍耐是心灵的陈酿。所有沉淀，终将成就软糯清香。", kw:"积累 · 转化" },
+    { text:"糯米来自土地，粽叶来自自然。回到传统节日，汲取脚踏实地的能量。", kw:"扎根" },
+    { text:"五花肉肥瘦相间才够香，你也不必只展示坚强的那一面。", kw:"完整的自己" },
+    { text:"板栗藏在糯米深处，被慢慢蒸透——有些价值，需要时间才被看见，包括你的。", kw:"耐心 · 价值" },
+  ],
+  healthy: [
+    { text:"轻简的食材，如同放下执念的心灵。一捧燕麦，几朵菇，简单却能治愈。", kw:"清朗自洽" },
+    { text:"紫米的颜色来自天然花青素，你的成长来自每一次新的尝试。端午，是与众不同的开始。", kw:"拥抱变化" },
+    { text:"抹茶的微苦，麻薯的拉丝，红豆的甜蜜——生活本就多味。正念品尝，与每一种滋味和解。", kw:"当下 · 和解" },
+  ]
+};
+
+const state = { leaf: null, grain: null, flavor: 'sweet', fillings: [], currentMsgIndex: 0, cardChoice: 'cross' };
+const el = (id) => document.getElementById(id);
+
+function renderLeafGrid(){
+  el('leafGrid').innerHTML = LEAVES.map(l => `
+    <div class="opt" data-type="leaf" data-id="${l.id}">
+      <span class="ic">${l.icon}</span>
+      <span class="lb">${l.label}</span>
+      <span class="sub-lb">${l.sub}</span>
+    </div>`).join('');
+}
+function renderGrainGrid(){
+  el('grainGrid').innerHTML = GRAINS.map(g => `
+    <div class="opt" data-type="grain" data-id="${g.id}">
+      <span class="ic">🍚</span>
+      <span class="lb">${g.label}</span>
+      <span class="sub-lb">${g.sub}</span>
+    </div>`).join('');
+}
+function renderFillingGrid(){
+  const list = FILLINGS[state.flavor];
+  el('fillingGrid').innerHTML = list.map(f => `
+    <div class="opt" data-type="filling" data-id="${f.id}">
+      <span class="ic">${f.icon}</span>
+      <span class="lb">${f.label}</span>
+    </div>`).join('');
+  syncFillingSelection();
+}
+function syncFillingSelection(){
+  document.querySelectorAll('#fillingGrid .opt').forEach(node => {
+    const selected = state.fillings.includes(node.dataset.id);
+    node.classList.toggle('selected', selected);
+    node.classList.toggle('salty', state.flavor === 'salty');
+  });
+  const count = state.fillings.length;
+  const note = el('fillingNote');
+  if(count === 0){
+    note.innerHTML = '可多选，建议不超过 <b>3 种</b>，搭配更和谐。';
+  } else {
+    const names = state.fillings.map(id => [...FILLINGS.sweet, ...FILLINGS.salty].find(f=>f.id===id)?.label).filter(Boolean);
+    note.innerHTML = `已选：<b>${names.join('、')}</b>`;
+  }
+}
+
+document.addEventListener('click', (e) => {
+  const opt = e.target.closest('.opt');
+  if(opt){
+    const type = opt.dataset.type, id = opt.dataset.id;
+    if(type === 'leaf'){
+      state.leaf = id;
+      document.querySelectorAll('#leafGrid .opt').forEach(n => n.classList.toggle('selected', n.dataset.id===id));
+    }
+    if(type === 'grain'){
+      state.grain = id;
+      document.querySelectorAll('#grainGrid .opt').forEach(n => n.classList.toggle('selected', n.dataset.id===id));
+    }
+    if(type === 'filling'){
+      const idx = state.fillings.indexOf(id);
+      if(idx > -1){ state.fillings.splice(idx,1); }
+      else {
+        if(state.fillings.length >= 3){ showLimitMsg('最多选 3 种馅料哦，先取消一个再试试～'); return; }
+        state.fillings.push(id);
+      }
+      syncFillingSelection();
+    }
+    updatePreview();
+  }
+
+  const ftab = e.target.closest('.ftab');
+  if(ftab){
+    const flavor = ftab.dataset.flavor;
+    if(flavor !== state.flavor){
+      state.flavor = flavor; state.fillings = [];
+      document.querySelectorAll('.ftab').forEach(t => t.classList.remove('active'));
+      ftab.classList.add('active');
+      renderFillingGrid();
+      updatePreview();
+    }
+  }
+
+  // 处理封面风格选择
+  const choice = e.target.closest('.card-choice');
+  if(choice){
+    state.cardChoice = choice.dataset.choice;
+    document.querySelectorAll('.card-choice').forEach(c => c.classList.remove('selected'));
+    choice.classList.add('selected');
+    // 动态同步剥开区域的SVG视图预览
+    el('splitZongziSvg').innerHTML = buildZongziSVG(state.cardChoice === 'cross' ? 1 : 2);
+  }
+});
+
+function showLimitMsg(msg){
+  const node = el('limitMsg');
+  node.textContent = msg;
+  clearTimeout(showLimitMsg._t);
+  showLimitMsg._t = setTimeout(()=>{ node.textContent = ''; }, 2200);
+}
+
+function getLeafColor(){
+  const l = LEAVES.find(x => x.id === state.leaf);
+  return l ? { fill: l.color, dark: l.dark } : { fill:'#C9C2AE', dark:'#A9A28F' };
+}
+function getGrainColor(){
+  const g = GRAINS.find(x => x.id === state.grain);
+  return g ? g.color : '#F7F3E9';
+}
+
+// 华丽重构：全新美化的打开状态设计
+function buildZongziSVG(visualType = 2){
+  const leaf = getLeafColor();
+  const hasLeaf = !!state.leaf;
+  const leafFill = hasLeaf ? leaf.fill : '#5E7A4E';
+  const leafDark = hasLeaf ? leaf.dark : '#3F5435';
+  const leafDarkest = hasLeaf ? shade(leaf.dark, -22) : '#2A3B23';
+  
+  const grainColor = getGrainColor();
+  const hasGrain = !!state.grain;
+
+  if (visualType === 1) {
+    // 全新美化的“半开粽子”SVG：剥开粽叶，露出软糯饱满的圆角粽身与馅料
+    const bodyFill = hasGrain ? grainColor : '#F7F3E9';
+    const strokeColor = shade(bodyFill, -12);
+    
+    // 映射馅料颜色，加入柔和细腻的高光感
+    const speckleColors = state.fillings.slice(0,3).map((id, i) => {
+      const isSalty = FILLINGS.salty.some(f=>f.id===id);
+      // 甜口：红豆/枣红/芝麻灰；咸口：蛋黄橙/鲜肉褐/香菇暗褐
+      return isSalty ? ['#D46B43','#8E503A','#B57E4A'][i%3] : ['#8A3B2E','#C95A49','#5C536B'][i%3];
+    });
+
+    let fillingsMarkup = '';
+    if(hasGrain && state.fillings.length > 0){
+      // 小配料点：不再用“大馅料圆心”，改为 7 个自然分散的小点，视觉上更像均匀嵌在米粒表面。
+      // 这些点位都落在白色粽身内部，避免贴边或聚成一团。
+      const dotPositions = [
+        { x: 94,  y: 82,  r: 3.1 },
+        { x: 124, y: 94,  r: 2.6 },
+        { x: 79,  y: 118, r: 2.8 },
+        { x: 141, y: 123, r: 3.2 },
+        { x: 100, y: 145, r: 2.5 },
+        { x: 123, y: 163, r: 2.9 },
+        { x: 72,  y: 153, r: 2.3 }
+      ];
+      const chosenColors = speckleColors.length ? speckleColors : ['#8A3B2E'];
+
+      dotPositions.forEach((pos, i) => {
+        const c = chosenColors[i % chosenColors.length];
+        const haloR = pos.r + 1.6;
+        fillingsMarkup += `
+          <circle cx="${pos.x}" cy="${pos.y}" r="${haloR}" fill="${c}" opacity="0.14"/>
+          <circle cx="${pos.x}" cy="${pos.y}" r="${pos.r}" fill="${c}" opacity="0.82"/>
+          <circle cx="${pos.x - 0.8}" cy="${pos.y - 0.8}" r="${Math.max(0.7, pos.r * 0.34)}" fill="#fff" opacity="0.32"/>
+        `;
+      });
+    }
+
+    return `
+      <defs>
+        <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+          <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#2B2620" flood-opacity="0.15"/>
+        </filter>
+        <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="${leafFill}"/>
+          <stop offset="100%" stop-color="${leafDark}"/>
+        </linearGradient>
+      </defs>
+
+      <path d="M 20,180 Q 100,5 200,180 Q 110,230 20,180 Z" fill="url(#leafGrad)" opacity="0.85" />
+      <path d="M 40,195 Q 110,35 180,195" stroke="${leafDarkest}" stroke-width="1" fill="none" opacity="0.2"/>
+
+      <path d="M 55,115 Q 15,130 30,195 Q 65,185 70,145 Z" fill="${leafDark}" stroke="${leafDarkest}" stroke-width="0.5"/>
+      <path d="M 30,195 Q 50,140 55,115" stroke="${leafFill}" stroke-width="1" fill="none" opacity="0.4"/>
+      <path d="M 160,110 Q 205,135 180,200 Q 145,190 145,150 Z" fill="${leafDarkest}" />
+      <path d="M 160,110 Q 175,160 180,200" stroke="${leafFill}" stroke-width="1" fill="none" opacity="0.3"/>
+
+      <path d="M 110,45 C 140,45 175,125 165,165 C 155,195 75,195 60,165 C 50,125 80,45 110,45 Z" 
+            fill="${bodyFill}" stroke="${strokeColor}" stroke-width="1.5" filter="url(#softShadow)"/>
+
+      <circle cx="85" cy="80" r="1.5" fill="${strokeColor}" opacity="0.4"/>
+      <circle cx="140" cy="105" r="2" fill="${strokeColor}" opacity="0.3"/>
+      <circle cx="115" cy="165" r="1.5" fill="${strokeColor}" opacity="0.5"/>
+      <circle cx="75" cy="130" r="2" fill="${strokeColor}" opacity="0.3"/>
+
+      ${fillingsMarkup}
+
+      <path d="M 40,185 Q 105,215 175,190" stroke="#E5DDCB" stroke-width="2.5" fill="none" opacity="0.9"/>
+      <path d="M 45,187 Q 105,217 170,192" stroke="#BFA88F" stroke-width="0.5" fill="none" opacity="0.5"/>
+    `;
+  } else {
+    // 默认选项：2 经典完整四面体外壳
+    const opacity = hasLeaf ? 1 : 0.55;
+    const dash = hasLeaf ? '' : 'stroke-dasharray="5,4"';
+    const strokeColor = hasLeaf ? 'none' : '#9A9384';
+
+    return `
+      <polygon points="100,18 35,183 100,203" fill="${leafFill}" opacity="${opacity}" stroke="${strokeColor}" stroke-width="1.5" ${dash}/>
+      <polygon points="100,18 165,183 100,203" fill="${leafDark}" opacity="${opacity}" stroke="${strokeColor}" stroke-width="1.5" ${dash}/>
+      <polygon points="35,183 165,183 100,203" fill="${leafDarkest}" opacity="${opacity}"/>
+
+      ${hasLeaf ? `
+      <line x1="100" y1="18" x2="55" y2="153" stroke="${leafDarkest}" stroke-width="2" opacity="0.5"/>
+      <line x1="78" y1="58" x2="48" y2="168" stroke="${leafDarkest}" stroke-width="1.5" opacity="0.35"/>
+      <line x1="100" y1="18" x2="145" y2="153" stroke="${leafDarkest}" stroke-width="2" opacity="0.45"/>
+      <line x1="122" y1="58" x2="152" y2="168" stroke="${leafDarkest}" stroke-width="1.5" opacity="0.3"/>
+      <line x1="100" y1="18" x2="100" y2="203" stroke="${leafDarkest}" stroke-width="2" opacity="0.55"/>
+
+      <path d="M 38,108 Q 100,93 162,108" stroke="#E8DDBE" stroke-width="3.5" fill="none" opacity="0.85"/>
+      <path d="M 42,148 Q 100,136 158,148" stroke="#E8DDBE" stroke-width="3.5" fill="none" opacity="0.85"/>
+      <line x1="60" y1="43" x2="135" y2="173" stroke="#E8DDBE" stroke-width="3" opacity="0.75"/>
+
+      <path d="M100,18 Q90,3 95,-7 Q103,3 100,18 Z" fill="${leafDark}"/>
+      <circle cx="100" cy="16" r="4" fill="${leafDarkest}"/>
+      ` : `
+      <circle cx="100" cy="16" r="4" fill="none" stroke="${strokeColor}" stroke-width="1.5"/>
+      `}
+    `;
+  }
+}
+
+function shade(hex, percent){
+  const num = parseInt(hex.replace('#',''), 16);
+  let r = (num >> 16) + Math.round(255 * (percent/100));
+  let g = ((num >> 8) & 0x00FF) + Math.round(255 * (percent/100));
+  let b = (num & 0x0000FF) + Math.round(255 * (percent/100));
+  r = Math.max(0, Math.min(255, r));
+  g = Math.max(0, Math.min(255, g));
+  b = Math.max(0, Math.min(255, b));
+  return '#' + (0x1000000 + r*0x10000 + g*0x100 + b).toString(16).slice(1);
+}
+
+function updatePreview(){
+  el('zongziSvg').innerHTML = buildZongziSVG(2); // 首页始终显示包裹完好形态
+  const steps = [state.leaf, state.grain, state.fillings.length>0].filter(Boolean).length;
+  const pct = Math.round((steps/3)*100);
+  el('progressFill').style.width = pct + '%';
+  el('progressText').textContent = `${steps} / 3 步`;
+  const { name, tags } = computeNameAndTags();
+  el('previewName').textContent = name;
+  el('previewTags').textContent = tags;
+  const ready = state.leaf && state.grain && state.fillings.length > 0;
+  el('steamBtn').disabled = !ready;
+  el('steamBtn').textContent = ready ? '放入蒸锅' : '选齐粽叶 · 主料 · 馅料';
+}
+
+function computeNameAndTags(){
+  if(!state.leaf && !state.grain && state.fillings.length===0){
+    return { name:'还未命名', tags:'先从下面选一片粽叶吧' };
+  }
+  const grainObj = GRAINS.find(g=>g.id===state.grain);
+  const fillingObjs = state.fillings.map(id => [...FILLINGS.sweet, ...FILLINGS.salty].find(f=>f.id===id)).filter(Boolean);
+  let namePart = fillingObjs.length ? fillingObjs.map(f=>f.label.replace(/[泥酱蜜]/g,'')).join('') : '';
+  let grainPart = grainObj ? grainObj.label.replace('圆粒','').replace('杂粮','') : '';
+  let name = '';
+  if(namePart && grainPart) name = `${grainPart}${namePart}粽`;
+  else if(namePart) name = `${namePart}粽`;
+  else if(grainPart) name = `${grainPart}粽`;
+  else name = '未完成的粽子';
+  const tags = [
+    state.leaf ? LEAVES.find(l=>l.id===state.leaf)?.label : null,
+    grainObj ? grainObj.label : null,
+    state.flavor === 'sweet' ? '甜口' : '咸口',
+  ].filter(Boolean).join(' · ');
+  return { name, tags: tags || '继续搭配吧' };
+}
+
+el('steamBtn').addEventListener('click', () => {
+  if(el('steamBtn').disabled) return;
+  startSteaming();
+});
+
+function startSteaming(){
+  const btn = el('steamBtn');
+  btn.disabled = true;
+  const originalText = btn.textContent;
+  let pct = 0;
+  btn.textContent = '蒸煮中… 0%';
+  const interval = setInterval(() => {
+    pct += Math.random()*18 + 8;
+    if(pct >= 100){
+      pct = 100;
+      clearInterval(interval);
+      btn.textContent = '出锅啦';
+      setTimeout(() => { 
+        // 隐藏包粽子工作台，展现解开发现阶段
+        el('diyStage').style.display = 'none';
+        el('peelingStage').classList.add('show');
+        // 默认显示切面视图
+        el('splitZongziSvg').innerHTML = buildZongziSVG(state.cardChoice === 'cross' ? 1 : 2);
+        btn.textContent = originalText; 
+        btn.disabled = false; 
+      }, 450);
+    } else {
+      btn.textContent = `蒸煮中… ${Math.floor(pct)}%`;
+    }
+  }, 220);
+}
+
+function pickMessagePool(){
+  if(state.grain === 'yanmai'){ return MESSAGES.healthy; }
+  return MESSAGES[state.flavor];
+}
+
+el('generateCardBtn').addEventListener('click', () => {
+  openCard();
+});
+
+function openCard(){
+  const pool = pickMessagePool();
+  state.currentMsgIndex = Math.floor(Math.random()*pool.length);
+  renderCard();
+  el('overlay').classList.add('show');
+  checkBadges();
+}
+
+function renderCard(){
+  const pool = pickMessagePool();
+  const msg = pool[state.currentMsgIndex];
+  const { name, tags } = computeNameAndTags();
+  
+  // 根据用户在剥开阶段选择的 cardChoice（'cross' | 'wrapped'），生成对应样式的SVG写入卡片
+  const finalVisualCode = buildZongziSVG(state.cardChoice === 'cross' ? 1 : 2);
+  el('cardSvgWrap').innerHTML = `<svg viewBox="0 0 220 240" xmlns="http://www.w3.org/2000/svg">${finalVisualCode}</svg>`;
+  
+  el('cardName').textContent = name;
+  el('cardTags').textContent = tags;
+  el('cardMsg').textContent = msg.text;
+  el('cardKeyword').textContent = msg.kw;
+}
+
+el('rerollBtn').addEventListener('click', () => {
+  const pool = pickMessagePool();
+  let next;
+  do { next = Math.floor(Math.random()*pool.length); } while(pool.length>1 && next === state.currentMsgIndex);
+  state.currentMsgIndex = next;
+  renderCard();
+});
+
+// 重置回首页，还原状态
+el('closeBtn').addEventListener('click', () => {
+  el('overlay').classList.remove('show');
+  el('peelingStage').classList.remove('show');
+  el('diyStage').style.display = 'block';
+  resetWorkflow();
+});
+
+function resetWorkflow() {
+  state.leaf = null;
+  state.grain = null;
+  state.fillings = [];
+  state.cardChoice = 'cross';
+  
+  document.querySelectorAll('.opt').forEach(n => n.classList.remove('selected'));
+  document.querySelectorAll('.card-choice').forEach((c, idx) => {
+    c.classList.toggle('selected', idx === 0);
+  });
+  
+  updatePreview();
+  syncFillingSelection();
+}
+
+el('overlay').addEventListener('click', (e) => { 
+  if(e.target.id === 'overlay') el('overlay').classList.remove('show'); 
+});
+
+el('saveBtn').addEventListener('click', async () => {
+  const card = el('shareCard');
+  el('saveBtn').textContent = '生成中…';
+  try{
+    const canvas = await html2canvas(card, { scale: 2, backgroundColor: '#FFFFFF', useCORS:true });
+    const link = document.createElement('a');
+    link.download = `心粽卡-${computeNameAndTags().name}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    showToast('已保存到本地，分享给朋友吧');
+  }catch(err){
+    showToast('保存失败，长按卡片截图也可以哦');
+  }
+  el('saveBtn').textContent = '保存图片';
+});
+
+function showToast(msg){
+  const t = el('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=> t.classList.remove('show'), 2400);
+}
+
+const earnedBadges = new Set();
+let steamCount = 0;
+function checkBadges(){
+  steamCount += 1;
+  if(state.fillings.length >= 3){ earnedBadges.add('triple'); }
+  if(state.grain === 'yanmai'){ earnedBadges.add('healthy'); }
+  const order = ['triple','healthy'];
+  const labels = { triple:'三拼馅料师', healthy:'轻盈生活家' };
+  el('badgeRow').innerHTML = order.filter(b => earnedBadges.has(b))
+    .map(b => `<span class="badge">${labels[b]}</span>`).join('');
+}
+
+renderLeafGrid();
+renderGrainGrid();
+renderFillingGrid();
+updatePreview();
+</script>
+
+</body>
+</html>
