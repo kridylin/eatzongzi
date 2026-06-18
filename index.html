@@ -248,6 +248,95 @@
     border: 1px solid var(--leaf-mid);
   }
 
+
+  /* ---------- K心理端午活动 ---------- */
+  .activity-open-btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    margin-top: 20px; padding: 12px 18px;
+    border-radius: 999px; border: 1px solid var(--leaf-mid);
+    background: var(--leaf); color:#fff;
+    font-size: 14px; font-weight: 900; letter-spacing: 0.03em;
+    cursor:pointer; font-family: inherit;
+    box-shadow: 0 6px 18px rgba(74,103,65,0.16);
+  }
+  .activity-open-btn:active{ transform: scale(0.98); }
+  .activity-mini-btn{
+    margin-top: 14px; width:100%; padding: 13px 14px;
+    border-radius: 12px; border: 2px solid var(--line);
+    background: var(--paper); color: var(--leaf);
+    font-size: 14px; font-weight: 900; font-family: inherit;
+    cursor:pointer;
+  }
+  .activity-mini-btn:active{ transform: scale(0.98); }
+
+  .activity-overlay{
+    position: fixed; inset:0; background: rgba(43,38,32,0.62);
+    display:flex; align-items:center; justify-content:center; z-index: 70;
+    padding: 20px; opacity:0; pointer-events:none; transition: opacity 0.25s ease;
+  }
+  .activity-overlay.show{ opacity:1; pointer-events:auto; }
+  .activity-wrap{
+    width:100%; max-width: 430px; max-height: 92vh; overflow-y:auto;
+    transform: scale(0.94); transition: transform 0.25s ease;
+  }
+  .activity-overlay.show .activity-wrap{ transform: scale(1); }
+  .activity-card{
+    background: var(--paper); border: 1px solid var(--line); border-radius: 22px;
+    padding: 26px 22px 22px; overflow:hidden; position:relative;
+  }
+  .activity-card::before{
+    content:""; position:absolute; left:-40px; right:-40px; top:-70px; height:130px;
+    background: radial-gradient(circle at 50% 20%, rgba(232,240,227,0.95), rgba(232,240,227,0));
+    pointer-events:none;
+  }
+  .activity-brand{
+    position:relative; font-size: 11px; letter-spacing:0.22em; color: var(--leaf);
+    font-weight:900; text-align:center; margin-bottom: 10px;
+  }
+  .activity-title{
+    position:relative; text-align:center; font-size: 25px; line-height:1.25;
+    font-weight: 950; margin: 0 0 6px; color: var(--ink);
+  }
+  .activity-date{
+    position:relative; text-align:center; font-size: 13px; font-weight:800;
+    color: var(--clay); margin-bottom: 18px;
+  }
+  .activity-list{ display:flex; flex-direction:column; gap:12px; }
+  .activity-event{
+    border: 1px solid var(--line); border-radius: 16px;
+    padding: 15px 14px 14px; background: #FFFDF8;
+  }
+  .activity-event.featured{ background: var(--clay-light); border-color:#E6C0AE; }
+  .activity-event-title{
+    display:flex; align-items:center; gap:8px;
+    font-size: 16px; font-weight: 950; margin-bottom: 8px; color: var(--ink);
+  }
+  .activity-event-title .mark{
+    width:26px; height:26px; border-radius:50%; flex-shrink:0;
+    background: var(--leaf); color:#fff; font-size:13px; font-weight:900;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .activity-event.featured .mark{ background: var(--clay); }
+  .activity-meta{
+    display:grid; gap:5px; margin-bottom:9px;
+    font-size: 12.8px; color: var(--ink-soft); line-height:1.55;
+  }
+  .activity-meta b{ color: var(--ink); }
+  .activity-desc{
+    font-size: 13.2px; color: var(--ink); line-height:1.75; font-weight:650;
+    padding-top: 8px; border-top: 1px dashed var(--line);
+  }
+  .activity-note{
+    margin-top: 14px; padding: 12px 14px; border-radius: 14px;
+    background: var(--leaf-light); color: var(--leaf);
+    font-size: 12.5px; line-height:1.65; font-weight:800; text-align:center;
+  }
+  .activity-close{
+    display:block; margin: 14px auto 0; background:none; border:none;
+    color: rgba(255,255,255,0.92); font-size: 13.5px; cursor:pointer;
+    font-family: inherit; font-weight:800;
+  }
+
   .toast{
     position: fixed; bottom: 28px; left:50%; transform: translateX(-50%) translateY(20px);
     background: var(--ink); color: var(--rice); padding: 13px 24px; border-radius: 999px;
@@ -262,6 +351,7 @@
   <div class="eyebrow">K心理 · ZBTI 粽格测试</div>
   <h1>包一只<span class="accent">心粽</span></h1>
   <p class="sub">挑一片粽叶，选一把米，填一份心意。<br>你以为你在选配料，其实是在暴露自己的隐藏人格。</p>
+  <button class="activity-open-btn" id="activityBtnTop">🌿 查看K心理端午活动</button>
 </header>
 
 <main>
@@ -275,6 +365,7 @@
       <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
       <div class="progress-text" id="progressText">0 / 3 步</div>
       <button class="steam-btn" id="steamBtn" disabled>选齐粽叶 · 主料 · 馅料</button>
+      <button class="activity-mini-btn" id="activityBtnPreview">查看K心理端午活动安排</button>
       <div class="limit-msg" id="limitMsg"></div>
     </div>
 
@@ -335,9 +426,57 @@
 
 <footer>
   每一只粽子生成一份粽格画像 · 仅供娱乐，也愿你从中看见一点自己<br>
+  测完也欢迎来线下活动见一见真实的人<br>
   端午安康 · K心理<br>
   +创作者vx：Nllsy-Ao_o
 </footer>
+
+
+<div class="activity-overlay" id="activityOverlay">
+  <div class="activity-wrap">
+    <div class="activity-card">
+      <div class="activity-brand">K 心 理 · 端 午 活 动</div>
+      <h2 class="activity-title">本周活动安排</h2>
+      <div class="activity-date">6月20日 - 6月21日 · 广州</div>
+
+      <div class="activity-list">
+        <div class="activity-event featured">
+          <div class="activity-event-title"><span class="mark">1</span>恋综小屋之广州单身联谊</div>
+          <div class="activity-meta">
+            <div><b>时间：</b>本周六 6.20 19:30-22:00</div>
+            <div><b>地点：</b>广州天河区</div>
+            <div><b>费用：</b>78</div>
+          </div>
+          <div class="activity-desc">在碰撞中看见自己，在游戏里靠近他人。</div>
+        </div>
+
+        <div class="activity-event">
+          <div class="activity-event-title"><span class="mark">2</span>《救人与越界》</div>
+          <div class="activity-meta">
+            <div><b>时间：</b>本周日 6.21 13:45-17:30</div>
+            <div><b>地点：</b>广州天河区</div>
+            <div><b>费用：</b>99</div>
+            <div><b>人数：</b>限8人</div>
+          </div>
+          <div class="activity-desc">当“救人”与“守规”发生冲突，你会站在哪一边？</div>
+        </div>
+
+        <div class="activity-event">
+          <div class="activity-event-title"><span class="mark">3</span>露营+夸夸大会</div>
+          <div class="activity-meta">
+            <div><b>时间：</b>本周日 6.21 19:30-22:00</div>
+            <div><b>地点：</b>海心沙</div>
+            <div><b>费用：</b>58</div>
+          </div>
+          <div class="activity-desc">在夜晚露营氛围里，轻松相遇，认真夸夸彼此。</div>
+        </div>
+      </div>
+
+      <div class="activity-note">测完粽格，也可以来现场看看：你在测试里是哪种人，在真实关系里又会怎么靠近别人。</div>
+    </div>
+    <button class="activity-close" id="activityCloseBtn">关闭活动安排</button>
+  </div>
+</div>
 
 <div class="overlay" id="overlay">
   <div class="card-wrap">
@@ -554,6 +693,10 @@ const REPORT_SIGNS = [
 
 const state = { leaf: null, grain: null, flavor: 'sweet', fillings: [], reportVariant: 0, cardChoice: 'cross' };
 const el = (id) => document.getElementById(id);
+
+function openActivityOverlay(){ el('activityOverlay').classList.add('show'); }
+function closeActivityOverlay(){ el('activityOverlay').classList.remove('show'); }
+
 
 function renderLeafGrid(){
   el('leafGrid').innerHTML = LEAVES.map(l => `
@@ -1042,6 +1185,14 @@ function showToast(msg){
   t.classList.add('show');
   setTimeout(()=> t.classList.remove('show'), 2400);
 }
+
+
+el('activityBtnTop').addEventListener('click', openActivityOverlay);
+el('activityBtnPreview').addEventListener('click', openActivityOverlay);
+el('activityCloseBtn').addEventListener('click', closeActivityOverlay);
+el('activityOverlay').addEventListener('click', (e) => {
+  if(e.target.id === 'activityOverlay') closeActivityOverlay();
+});
 
 const earnedBadges = new Set();
 function checkBadges(){
