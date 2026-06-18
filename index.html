@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>包一只心粽 · zbti粽子人格测试</title>
+<title>包一只心粽 · zbti 粽格测试</title>
 <style>
   :root{
     --rice: #FBF6EC;
@@ -977,7 +977,7 @@ function renderCard(){
   el('cardKeyword').textContent = report.keyword;
   el('rarityPill').textContent = `${report.rarity.label} · ${report.rarity.rate}`;
   el('rarityPill').className = `rarity-pill ${report.rarity.cls}`;
-  el('shareTitle').innerHTML = `<span>分享</span>${report.shareTitle}`;
+  el('shareTitle').innerHTML = `<span>小分享</span>${report.shareTitle}`;
 }
 
 el('rerollBtn').addEventListener('click', () => {
@@ -989,7 +989,7 @@ el('copyTitleBtn').addEventListener('click', async () => {
   const title = buildPersonaReport().shareTitle;
   try{
     await navigator.clipboard.writeText(title);
-    showToast('分享标题已复制');
+    showToast('小分享已复制');
   }catch(err){
     showToast('复制失败，可以手动复制卡片标题');
   }
