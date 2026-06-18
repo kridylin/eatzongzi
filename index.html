@@ -259,7 +259,7 @@
 <body>
 
 <header>
-  <div class="eyebrow">K心理 · ZBTI 心粽人格测试</div>
+  <div class="eyebrow">K心理 · ZBTI 粽格测试</div>
   <h1>包一只<span class="accent">心粽</span></h1>
   <p class="sub">挑一片粽叶，选一把米，填一份心意。<br>你以为你在选配料，其实是在暴露自己的隐藏人格。</p>
 </header>
@@ -317,7 +317,7 @@
       <svg id="splitZongziSvg" viewBox="0 0 220 240" xmlns="http://www.w3.org/2000/svg"></svg>
     </div>
     <div class="split-actions">
-      <div class="action-title">为你的心粽人格选择一张封面款式：</div>
+      <div class="action-title">为你的粽格选择一张封面款式：</div>
       <div class="card-choice-group">
         <div class="card-choice selected" data-choice="cross">
           <span class="ic">✂️</span>
@@ -328,13 +328,13 @@
           <span class="lb">完好包裹</span>
         </div>
       </div>
-      <button class="final-btn" id="generateCardBtn">生成心粽人格报告</button>
+      <button class="final-btn" id="generateCardBtn">生成粽格报告</button>
     </div>
   </div>
 </main>
 
 <footer>
-  每一只粽子生成一份心粽人格画像 · 仅供娱乐，也愿你从中看见一点自己<br>
+  每一只粽子生成一份粽格画像 · 仅供娱乐，也愿你从中看见一点自己<br>
   端午安康 · K心理<br>
   +创作者vx：Nllsy-Ao_o
 </footer>
@@ -883,9 +883,9 @@ function buildXhsTitle(report){
     `这只${zongziName}把我人格扒出来了：${main}`,
     `端午版MBTI也太会了，我居然是「${main}」`,
     `朋友说我这个「${main}」人格准到离谱`,
-    `测出${rarity}级心粽人格：${main}，有点被冒犯但很准`,
+    `测出${rarity}级粽格：${main}，有点被冒犯但很准`,
     `原来我不是想太多，我是「${main}」`,
-    `我不允许只有我一个人测这个心粽人格`,
+    `我不允许只有我一个人测这个粽格`,
     `我的端午人格报告：${main} / ${keyword} / 真的很像我`
   ];
   return pickFrom(templates, 1);
@@ -942,12 +942,12 @@ ${comboLine}`,
 ${primary.analysis}`,
     `【隐藏属性】
 ${hiddenLine}`,
-    `【今日心粽签】
+    `【今日粽签】
 ${sign}`
   ].join('\n\n');
 
   const report = {
-    title: `你的心粽人格：${primary.name}`,
+    title: `你的粽格：${primary.name}`,
     tags: `${zongziName} · ${allLabels.join(' × ')}`,
     keyword: `人格关键词：${keywords.join(' / ')}`,
     text,
@@ -1026,7 +1026,7 @@ el('saveBtn').addEventListener('click', async () => {
   try{
     const canvas = await html2canvas(card, { scale: 2, backgroundColor: '#FFFFFF', useCORS:true });
     const link = document.createElement('a');
-    link.download = `心粽人格卡-${buildPersonaReport().title.replace(/[\\/:*?"<>|]/g,'')}.png`;
+    link.download = `粽格卡-${buildPersonaReport().title.replace(/[\\/:*?"<>|]/g,'')}.png`;
     link.href = canvas.toDataURL('image/png');
     link.click();
     showToast('已保存到本地，分享给朋友吧');
